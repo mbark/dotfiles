@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/martinba/dev/ambiguous-index-finder'
+let g:netrw_dirhist_2='/home/martinba/dev/ambiguous-index-finder/.git'
+let g:netrw_dirhist_3='/Users/martinba/dev/ambig-index-finder'
+let g:netrw_dirhist_4='/Users/martinba'
+let g:netrw_dirhist_5='/Users/martinba/dev/ambig-index-finder'
+let g:netrw_dirhist_6='/Users/martinba/dev/ambig-index-finder/src'
+let g:netrw_dirhist_7='/Users/martinba/.oh-my-zsh/lib'
+let g:netrw_dirhist_8='/Users/martinba/.lein'
