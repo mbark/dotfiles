@@ -96,3 +96,4 @@ export PATH="/usr/local/sbin:$PATH"
 eval $(thefuck --alias)
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.bin/tmuxinator.zsh

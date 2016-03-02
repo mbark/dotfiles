@@ -8,6 +8,7 @@
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.lein: lein
+    ~/.bin: bin
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

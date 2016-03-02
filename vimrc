@@ -12,6 +12,10 @@ else
 	let g:solarized_termcolors=256
 endif
 
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
 filetype plugin indent on
 let g:paredit_mode = 1
 
