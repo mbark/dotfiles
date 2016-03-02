@@ -26,7 +26,6 @@ autocmd BufRead,BufNewFile *.cljs setlocal filetype=clojure
 
 set number
 
-let NERDTreeWinSize = 20
 let NERDTreeShowHidden=1
 
 inoremap kj <ESC>
