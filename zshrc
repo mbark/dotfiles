@@ -66,9 +66,6 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 #
-# ooh, what is this? Aliases?
-source .oh-my-zsh/lib/alias.zsh
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
