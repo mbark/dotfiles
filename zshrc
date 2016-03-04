@@ -50,7 +50,7 @@ ZSH_THEME="pygmalion"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gnu-utils zsh-syntax-highlighting)
+plugins=(git gnu-utils vi-mode zsh-syntax-highlighting)
 
 # User configuration
 
@@ -60,7 +60,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin":~/bin
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
- export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 # make sure that if a program wants you to edit
 # text, that Vim is going to be there for you
 export EDITOR="vim"
@@ -91,3 +91,16 @@ export VISUAL=$EDITOR
 export PATH="/usr/local/sbin:$PATH"
 
 source ~/.bin/tmuxinator.zsh
+
+# Use vi-mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim cli mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
