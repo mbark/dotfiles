@@ -29,8 +29,6 @@ set number
 let NERDTreeShowHidden=1
 
 inoremap kj <ESC>
-map ö $
-map 0 ^
 map D <C-D>
 map U <C-U>
 
