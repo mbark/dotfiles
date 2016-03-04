@@ -55,3 +55,36 @@
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
+[submodule "vim/bundle/nerdtree-git-plugin"]
+	path = vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+[submodule "vim/bundle/paredit.vim"]
+	path = vim/bundle/paredit.vim
+	url = https://github.com/vim-scripts/paredit.vim
+[submodule "vim/bundle/rainbow"]
+	path = vim/bundle/rainbow
+	url = https://github.com/luochen1990/rainbow
+[submodule "vim/bundle/vim-classpath"]
+	path = vim/bundle/vim-classpath
+	url = https://github.com/tpope/vim-classpath
+[submodule "vim/bundle/vim-clojure-highlight"]
+	path = vim/bundle/vim-clojure-highlight
+	url = https://github.com/guns/vim-clojure-highlight
+[submodule "vim/bundle/vim-clojure-static"]
+	path = vim/bundle/vim-clojure-static
+	url = https://github.com/guns/vim-clojure-static
+[submodule "vim/bundle/vim-fireplace"]
+	path = vim/bundle/vim-fireplace
+	url = https://github.com/tpope/vim-fireplace
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "vim/bundle/vim-sensible"]
+	path = vim/bundle/vim-sensible
+	url = https://github.com/tpope/vim-sensible
+[submodule "vim/bundle/vim-tmux-navigator"]
+	path = vim/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
