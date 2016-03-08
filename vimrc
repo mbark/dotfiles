@@ -31,5 +31,5 @@ autocmd BufRead,BufNewFile *.cljs setlocal filetype=clojure
 
 set number
 
-inoremap kj <ESC>
+inoremap jj <ESC>
 let mapleader=","
