@@ -1,2 +1,4 @@
 *.swp
 .DS_Store
+vim/tmp_dirs/*
+!vim/tmp_dirs/.gitkeep
