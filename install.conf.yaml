@@ -13,3 +13,5 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [pip install powerline-status]
+  - [./fonts/install.sh]
