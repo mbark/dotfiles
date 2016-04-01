@@ -142,3 +142,12 @@
 [submodule "vim/bundle/vim-eastwood"]
 	path = vim/bundle/vim-eastwood
 	url = https://github.com/venantius/vim-eastwood
+[submodule "vim/bundle/vim-salve"]
+	path = vim/bundle/vim-salve
+	url = https://github.com/tpope/vim-salve
+[submodule "vim/bundle/vim-projectionist"]
+	path = vim/bundle/vim-projectionist
+	url = git://github.com/tpope/vim-projectionist.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
