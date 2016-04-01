@@ -96,7 +96,7 @@ source ~/.bin/tmuxinator.zsh
 
 # Use vi-mode
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=20
 
 # Use vim cli mode
 bindkey '^P' up-history
