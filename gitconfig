@@ -1,3 +1,5 @@
 [user]
 	email = martin.barksten@gmail.com
 	name = Martin Barksten
+[core]
+	excludesfile = /Users/mbark/.gitignore_global

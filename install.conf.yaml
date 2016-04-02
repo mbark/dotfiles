@@ -13,5 +13,6 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [pip install powerline-status]
+  - [pip install powerline-status --user]
   - [./fonts/install.sh]
+  - [git config --global core.excludesfile ~/.gitignore_global]
