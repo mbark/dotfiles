@@ -3,3 +3,5 @@
 	name = Martin Barksten
 [core]
 	excludesfile = /Users/mbark/.gitignore_global
+[push]
+	default = simple
