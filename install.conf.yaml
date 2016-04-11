@@ -10,6 +10,7 @@
     ~/.gitconfig: gitconfig
     ~/.lein: lein
     ~/.bin: bin
+    ~/.spacemacs: spacemacs
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
