@@ -19,7 +19,7 @@ set autoread
 let mapleader = ","
 let g:mapleader = ","
 
-inoremap jj <ESC>
+inoremap kj <ESC>
 
 " Fast saving
 nmap <leader>w :w!<cr>

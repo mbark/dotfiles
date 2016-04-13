@@ -91,6 +91,7 @@ export VISUAL=$EDITOR
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/Library/TeX/texbin/:$PATH"
 
 source ~/.bin/tmuxinator.zsh
 

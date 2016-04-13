@@ -101,9 +101,9 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
-                         spacemacs-dark
-                         spacemacs-light
+   dotspacemacs-themes '(spacemacs-dark
+                         smonokai
+                         pacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
@@ -263,6 +263,8 @@ you should place you code here."
   (setq evil-move-cursor-back nil)
   ;; Follow symlinks
   (setq vc-follow-symlinks t)
+  (setq neo-theme 'nerd)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
