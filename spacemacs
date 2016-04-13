@@ -24,7 +24,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     better-defaults
      emacs-lisp
      git
      osx
@@ -271,6 +270,7 @@ you should place you code here."
   (setq neo-theme 'nerd)
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (spacemacs/toggle-evil-cleverparens-on)
+  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
