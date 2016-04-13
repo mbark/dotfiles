@@ -27,14 +27,19 @@ values."
      better-defaults
      emacs-lisp
      git
+     osx
      markdown
      org
      clojure
      java
      sql
      latex
+     spotify
      shell-scripts
      restclient
+     evil-cleverparens
+     evil-commentary
+     eyebrowse
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
@@ -102,8 +107,8 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         smonokai
-                         pacemacs-light
+                         monokai
+                         spacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
@@ -265,6 +270,7 @@ you should place you code here."
   (setq vc-follow-symlinks t)
   (setq neo-theme 'nerd)
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (spacemacs/toggle-evil-cleverparens-on)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
