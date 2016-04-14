@@ -50,7 +50,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     adjust-parens
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -259,16 +262,29 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
-  ;; Exit insert mode with kj
-  (setq evil-escape-key-sequence "kj")
-  ;; Delete whitespace on save
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  ;; Don't move back one character when exiting insert mode
+
+  ;; Evil configuration
   (setq evil-move-cursor-back nil)
+  (setq evil-escape-key-sequence "kj")
+
   ;; Follow symlinks
   (setq vc-follow-symlinks t)
+
+  ;; Look like nerdtree please
   (setq neo-theme 'nerd)
+
+  ;; Delete whitespace on save
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  ;; Allow instant preview of pdfs when editing latex
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+  ;; Use adjust parens mode in emacs and clojure
+  (require 'adjust-parens)
+  (add-hook 'emacs-lisp-mode-hook #'adjust-parens-mode)
+  (add-hook 'clojure-mode-hook #'adjust-parens-mode)
+
+  ;; Enable cleverparens in clojure
   (spacemacs/toggle-evil-cleverparens-on)
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
   )
