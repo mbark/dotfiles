@@ -32,6 +32,7 @@ values."
      clojure
      java
      sql
+     rust
      latex
      spotify
      shell-scripts
@@ -40,8 +41,9 @@ values."
      evil-commentary
      eyebrowse
      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
+             shell-default-shell 'eshell
+             shell-default-term-shell "/bin/zsh"
+             shell-enable-smart-eshell t)
      spell-checking
      syntax-checking
      version-control
@@ -287,6 +289,21 @@ you should place you code here."
   ;; Enable cleverparens in clojure
   (spacemacs/toggle-evil-cleverparens-on)
   (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+
+  ;; Enable racer for rust
+  (setq-default rust-enable-racer t)
+  (setq company-racer-rust-src "~/dotfiles/rust/src")
+  (setq company-racer-executable "~/.cargo/bin/racer")
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'rust-mode-hook
+            (lambda ()
+              (message "running rust mode hook")
+              (setq default-tab-width 4)
+              (setq evil-shift-width 4)
+              (setq tab-width 4)
+              (company-mode t)
+              (racer-mode)
+              ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
