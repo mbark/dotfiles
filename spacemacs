@@ -269,6 +269,9 @@ you should place you code here."
   ;; Always show line numbers by default
   (global-linum-mode t)
 
+  ;; Use avy timer instead of char word
+  (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
+
   ;; Evil configuration
   (setq evil-move-cursor-back nil)
   (setq evil-escape-key-sequence "kj")
