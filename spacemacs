@@ -31,6 +31,7 @@ values."
      org
      clojure
      java
+     go
      sql
      rust
      latex
@@ -55,6 +56,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     string-inflection
      adjust-parens
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -299,19 +301,22 @@ you should place you code here."
 
   ;; Enable racer for rust
   (setq-default rust-enable-racer t)
-  (setq company-racer-rust-src "~/dotfiles/rust/src")
-  (setq company-racer-executable "~/.cargo/bin/racer")
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'rust-mode-hook
-            (lambda ()
-              (message "running rust mode hook")
-              (setq default-tab-width 4)
-              (setq evil-shift-width 4)
-              (setq tab-width 4)
-              (company-mode t)
-              (racer-mode)
-              ))
+  (setq racer-cmd "~/.cargo/bin/racer")
+  (setq racer-rust-src-path "~/dotfiles/rust/src")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(magit-reset-arguments nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
