@@ -271,6 +271,9 @@ you should place you code here."
   ;; Always show line numbers by default
   (global-linum-mode t)
 
+  ;; Always use golden ratio
+  (golden-ratio-mode 1)
+
   ;; Use avy timer instead of char word
   (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
 
