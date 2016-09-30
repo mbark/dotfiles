@@ -31,12 +31,11 @@ values."
      org
      clojure
      java
-     go
      sql
      rust
      latex
      javascript
-     spotify
+     react
      shell-scripts
      restclient
      evil-cleverparens
@@ -199,7 +198,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native t
@@ -227,7 +226,7 @@ values."
    dotspacemacs-line-numbers 'relative
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -248,7 +247,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'trailing
    ))
 
 (defun dotspacemacs/user-init ()
@@ -272,7 +271,7 @@ you should place you code here."
   (global-linum-mode t)
 
   ;; Always use golden ratio
-  (golden-ratio-mode 1)
+  (golden-ratio-mode)
 
   ;; Use avy timer instead of char word
   (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
@@ -286,9 +285,6 @@ you should place you code here."
 
   ;; Look like nerdtree please
   (setq neo-theme 'nerd)
-
-  ;; Delete whitespace on save
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
   ;; Allow instant preview of pdfs when editing latex
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
@@ -306,20 +302,30 @@ you should place you code here."
   (setq-default rust-enable-racer t)
   (setq racer-cmd "~/.cargo/bin/racer")
   (setq racer-rust-src-path "~/dotfiles/rust/src")
+
+  ;; Eclim configuration for Java layer
+  (setq eclim-eclipse-dirs "/Applications/Eclipse.app/Contents/Eclipse")
+  (setq eclim-executable "/Applications/Eclipse.app/Contents/Eclipse/eclim")
+
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   js-indent-level 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(magit-reset-arguments nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+)

@@ -160,3 +160,6 @@
 [submodule "rust"]
 	path = rust
 	url = https://github.com/rust-lang/rust
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions

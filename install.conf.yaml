@@ -12,8 +12,7 @@
     ~/.lein: lein
     ~/.bin: bin
     ~/.spacemacs: spacemacs
+    ~/.gitignore_global: gitignore_global
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [./fonts/install.sh]
-  - [git config --global core.excludesfile ~/.gitignore_global]

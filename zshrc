@@ -6,7 +6,7 @@ export LANG=en_US.UTF-8
 
 ZSH_THEME="ys"
 
-plugins=(git gnu-utils vi-mode emoji zsh-syntax-highlighting)
+plugins=(git gnu-utils vi-mode emoji zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
