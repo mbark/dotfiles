@@ -157,9 +157,15 @@
 [submodule "zsh/themes/powerlevel9k"]
 	path = zsh/themes/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
-[submodule "rust"]
-	path = rust
-	url = https://github.com/rust-lang/rust
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "vim/bundle/ycmd"]
+	path = vim/bundle/ycmd
+	url = https://github.com/Valloric/ycmd
+[submodule "vim/bundle/YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
+[submodule "rust"]
+	path = rust
+	url = https://github.com/rust-lang/rust

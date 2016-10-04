@@ -36,15 +36,19 @@ values."
      latex
      javascript
      react
-     shell-scripts
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-support t)
+     ycmd
+     semantic
+     shell
      restclient
      evil-cleverparens
      evil-commentary
-     eyebrowse
      (shell :variables
-             shell-default-shell 'eshell
-             shell-default-term-shell "/bin/zsh"
-             shell-enable-smart-eshell t)
+            shell-default-shell 'eshell
+            shell-default-term-shell "/bin/zsh"
+            shell-enable-smart-eshell t)
      spell-checking
      syntax-checking
      version-control
@@ -307,6 +311,7 @@ you should place you code here."
   (setq eclim-eclipse-dirs "/Applications/Eclipse.app/Contents/Eclipse")
   (setq eclim-executable "/Applications/Eclipse.app/Contents/Eclipse/eclim")
 
+  ;; Use 2 spaces for indent when editing any js file
   (setq-default
    ;; js2-mode
    js2-basic-offset 2
@@ -318,14 +323,46 @@ you should place you code here."
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
 
+  ;; Align things in javascript more nicely
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
+  ;; Make flycheck check the $PROJECT_ROOT/include folder for C++ projects
+  (defun setup-flycheck-clang-project-path ()
+    (let ((root (ignore-errors (projectile-project-root))))
+      (when root
+        (add-to-list
+         (make-variable-buffer-local 'flycheck-clang-include-path)
+         (concat root "include")))))
+
+  ;; Default to using c++11, and add project path to flycheck include paths
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (setup-flycheck-clang-project-path)
+              (setq company-clang-arguments '("-std=c++11"))
+              (setq flycheck-clang-language-standard "c++11")))
+
+  (setq ycmd-server-command
+        (list "python"
+          (expand-file-name "~/dotfiles/vim/bundle/YouCompleteMe/third_party/ycmd/ycmd" )))
+  (setq ycmd-force-semantic-completion t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
-)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flycheck-ycmd company-ycmd ycmd request-deferred deferred evil-unimpaired clang-format projectile zenburn-theme xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit string-inflection stickyfunc-enhance srefactor sql-indent spacemacs-theme spaceline solarized-theme smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restclient restart-emacs rainbow-delimiters racer quelpa popwin persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-http neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diff-hl company-web company-tern company-statistics company-emacs-eclim company-c-headers company-auctex column-enforce-mode coffee-mode cmake-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
