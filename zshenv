@@ -7,3 +7,5 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 export RUST_SRC_PATH="$HOME/dotfiles/rust/src"
 export ECLIPSE_HOME="/Applications/Eclipse.app/Contents/Eclipse"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
