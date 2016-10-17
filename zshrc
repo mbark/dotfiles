@@ -10,6 +10,10 @@ plugins=(git gnu-utils vi-mode emoji zsh-syntax-highlighting docker)
 
 source $ZSH/oh-my-zsh.sh
 
+# Configuration for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
@@ -28,3 +32,5 @@ bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
 bindkey -M viins 'kj' vi-cmd-mode
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
