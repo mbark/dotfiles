@@ -1,35 +1,42 @@
 # load zgen
-source "${HOME}/dotfiles/zsh/zgen/zgen.zsh"
-
-# don't show the <<< even though we got the vi-mode plugin
-export RPS1="%{$reset_color%}"
+source "${HOME}/.zgen/zgen.zsh"
 
 # if the init scipt doesn't exist
-if ! zgen saved; then
-    zgen oh-my-zsh
+if ! zgen saved ; then
+    zgen prezto editor key-bindings 'vi'
+    zgen prezto editor dot-expansion 'yes'
+    zgen prezto prompt theme 'steeef'
+    zgen prezto tmux:auto-start local 'yes'
+    zgen prezto tmux:auto-start remote 'yes'
 
-    zgen oh-my-zsh plugins/brew
-    zgen oh-my-zsh plugins/command-not-found
-    zgen oh-my-zsh plugins/docker
-    zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/gnu-utils
-    zgen oh-my-zsh plugins/osx
-    zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/vi-mode
+    zgen prezto
 
-    zgen load b4b4r07/enhancd
+    zgen prezto archive
+    zgen prezto completion
+    zgen prezto directory
+    zgen prezto git
+    zgen prezto gnu-utility
+    zgen prezto history
+    zgen prezto homebrew
+    zgen prezto osx
+    zgen prezto tmux
+    zgen prezto utility
+
+    # must be loaded after the completion module
+    zgen prezto fasd
+
+    # these should be loaded 2nd last and last respectively
+    zgen prezto syntax-highlighting
+    zgen prezto prompt
+
+    # zgen load b4b4r07/enhancd init
     zgen load chrissicool/zsh-256color
     zgen load djui/alias-tips
     zgen load jreese/zsh-titles
     zgen load supercrabtree/k
     zgen load unixorn/autoupdate-zgen
     zgen load unixorn/tumult.plugin.zsh
-    zgen load willghatch/zsh-saneopt
     zgen load zlsun/solarized-man
-    zgen load zsh-users/zsh-completions
-
-    # the theme used
-    zgen load denysdovhan/spaceship-zsh-theme spaceship
 
     # must be loaded at the end of the file
     zgen load zsh-users/zsh-syntax-highlighting
@@ -37,7 +44,7 @@ if ! zgen saved; then
     zgen save
 fi
 
-ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
+export ZGEN_RESET_ON_CHANGE=(${HOME}/dotfiles/zshrc)
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -47,10 +54,6 @@ export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
 export ENHANCD_FILTER=fzf
-
-export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/.zsh
-export ZSH_THEME="spaceship"
 
 # Use vi-mode
 bindkey -v
@@ -67,3 +70,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # get the keybindings for fzf
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+
+# initalize fasd
+eval "$(fasd --init auto)"

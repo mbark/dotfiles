@@ -157,6 +157,3 @@
 [submodule "rust"]
 	path = rust
 	url = https://github.com/rust-lang/rust
-[submodule "zsh/zgen"]
-	path = zsh/zgen
-	url = https://github.com/tarjoilija/zgen
