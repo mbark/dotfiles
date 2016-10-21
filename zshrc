@@ -8,6 +8,8 @@ if ! zgen saved ; then
     zgen prezto prompt theme 'steeef'
     zgen prezto tmux:auto-start local 'yes'
     zgen prezto tmux:auto-start remote 'yes'
+    zgen prezto utility:color color 'yes'
+    zgen prezto '*:*' color 'yes'
 
     zgen prezto
 
@@ -19,6 +21,7 @@ if ! zgen saved ; then
     zgen prezto history
     zgen prezto homebrew
     zgen prezto osx
+    zgen prezto spectrum
     zgen prezto tmux
     zgen prezto utility
 
@@ -29,7 +32,6 @@ if ! zgen saved ; then
     zgen prezto syntax-highlighting
     zgen prezto prompt
 
-    # zgen load b4b4r07/enhancd init
     zgen load chrissicool/zsh-256color
     zgen load djui/alias-tips
     zgen load jreese/zsh-titles
@@ -52,6 +54,10 @@ export LANG=en_US.UTF-8
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
+
+# use ctrl p and n to step through the history
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 
 export ENHANCD_FILTER=fzf
 

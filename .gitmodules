@@ -157,3 +157,6 @@
 [submodule "rust"]
 	path = rust
 	url = https://github.com/rust-lang/rust
+[submodule "vim/bundle/dracula-theme"]
+	path = vim/bundle/dracula-theme
+	url = git@github.com:dracula/vim.git

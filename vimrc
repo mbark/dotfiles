@@ -106,10 +106,7 @@ try
       colorscheme default
       set nocursorline
   else
-      colorscheme solarized
-      let g:solarized_visibility = "high"
-      let g:solarized_contrast = "high"
-      let g:solarized_termcolors=17
+      colorscheme dracula
   endif
 catch
 endtry
@@ -567,7 +564,7 @@ au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="solarized"
+let g:airline_theme="simple"
 let g:airline_powerline_fonts = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
