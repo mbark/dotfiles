@@ -10,11 +10,16 @@ export ECLIPSE_HOME="/Applications/Eclipse.app/Contents/Eclipse"
 
 # Setup fzf
 if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="$PATH:/usr/local/opt/fzf/bin"
+    export PATH="$PATH:/usr/local/opt/fzf/bin"
 fi
 
 # Man path
 # --------
 if [[ ! "$MANPATH" == */usr/local/opt/fzf/man* && -d "/usr/local/opt/fzf/man" ]]; then
-  export MANPATH="$MANPATH:/usr/local/opt/fzf/man"
+    export MANPATH="$MANPATH:/usr/local/opt/fzf/man"
+fi
+
+# Zgen
+if [ -f $HOME/dotfiles/zshrc.zgen ]; then
+    source $HOME/dotfiles/zshrc.zgen
 fi
