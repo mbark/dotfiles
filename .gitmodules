@@ -37,45 +37,15 @@
 [submodule ".vim/bundle/vim-tmux-navigator"]
 	path = .vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
-[submodule "vim/autoload/vim-pathogen"]
-	path = vim/autoload/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen
-[submodule "vim/bundle/vim-colors-solarized"]
-	path = vim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
-[submodule "vim/bundle/nerdtree-git-plugin"]
-	path = vim/bundle/nerdtree-git-plugin
-	url = https://github.com/Xuyuanp/nerdtree-git-plugin
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
-[submodule "vim/bundle/paredit.vim"]
-	path = vim/bundle/paredit.vim
-	url = https://github.com/vim-scripts/paredit.vim
-[submodule "vim/bundle/rainbow"]
-	path = vim/bundle/rainbow
-	url = https://github.com/luochen1990/rainbow
-[submodule "vim/bundle/vim-classpath"]
-	path = vim/bundle/vim-classpath
-	url = https://github.com/tpope/vim-classpath
 [submodule "vim/bundle/vim-clojure-highlight"]
 	path = vim/bundle/vim-clojure-highlight
 	url = https://github.com/guns/vim-clojure-highlight
-[submodule "vim/bundle/vim-clojure-static"]
-	path = vim/bundle/vim-clojure-static
-	url = https://github.com/guns/vim-clojure-static
-[submodule "vim/bundle/vim-fireplace"]
-	path = vim/bundle/vim-fireplace
-	url = https://github.com/tpope/vim-fireplace
-[submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim/bundle/vim-sensible"]
 	path = vim/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible
@@ -88,63 +58,33 @@
 [submodule "vim/bundle/vim-snipmate"]
 	path = vim/bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate
-[submodule "vim/bundle/bufexplorer.zip"]
-	path = vim/bundle/bufexplorer.zip
-	url = https://github.com/vim-scripts/bufexplorer.zip
 [submodule "vim/bundle/mru.vim"]
 	path = vim/bundle/mru.vim
 	url = https://github.com/vim-scripts/mru.vim
-[submodule "vim/bundle/open_file_under_cursor.vim"]
-	path = vim/bundle/open_file_under_cursor.vim
-	url = https://github.com/amix/open_file_under_cursor.vim
 [submodule "vim/bundle/vim-multiple-cursors"]
 	path = vim/bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors
-[submodule "vim/bundle/vim-expand-region"]
-	path = vim/bundle/vim-expand-region
-	url = https://github.com/terryma/vim-expand-region
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
 [submodule "vim/bundle/vim-airline-themes"]
 	path = vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
-[submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
 [submodule "vim/bundle/vim-commentary"]
 	path = vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/powerline/fonts.git
-[submodule "vim/bundle/ack.vim"]
-	path = vim/bundle/ack.vim
-	url = https://github.com/mileszs/ack.vim
 [submodule "vim/bundle/ag.vim"]
 	path = vim/bundle/ag.vim
 	url = https://github.com/rking/ag.vim
 [submodule "vim/bundle/goyo.vim"]
 	path = vim/bundle/goyo.vim
 	url = https://github.com/junegunn/goyo.vim
-[submodule "vim/bundle/vim-zenroom2"]
-	path = vim/bundle/vim-zenroom2
-	url = https://github.com/amix/vim-zenroom2
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
-[submodule "vim/bundle/vim-eastwood"]
-	path = vim/bundle/vim-eastwood
-	url = https://github.com/venantius/vim-eastwood
-[submodule "vim/bundle/vim-salve"]
-	path = vim/bundle/vim-salve
-	url = https://github.com/tpope/vim-salve
-[submodule "vim/bundle/vim-projectionist"]
-	path = vim/bundle/vim-projectionist
-	url = git://github.com/tpope/vim-projectionist.git
-[submodule "vim/bundle/vim-dispatch"]
-	path = vim/bundle/vim-dispatch
-	url = git://github.com/tpope/vim-dispatch.git
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
@@ -160,3 +100,9 @@
 [submodule "vim/bundle/dracula-theme"]
 	path = vim/bundle/dracula-theme
 	url = git@github.com:dracula/vim.git
+[submodule "vim/bundle/--force"]
+	path = vim/bundle/--force
+	url = https://github.com/tpope/vim-pathogen
+[submodule "vim/bundle/vim-pathogen"]
+	path = vim/bundle/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen

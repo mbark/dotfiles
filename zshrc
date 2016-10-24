@@ -4,6 +4,8 @@ export ZGEN_RESET_ON_CHANGE=(${HOME}/dotfiles/zshrc)
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+alias vim="nvim"
+alias vi="nvim"
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
