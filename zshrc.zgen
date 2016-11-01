@@ -10,6 +10,7 @@ if ! zgen saved ; then
     zgen prezto tmux:auto-start remote 'yes'
     zgen prezto utility:color color 'yes'
     zgen prezto '*:*' color 'yes'
+    zgen prezto git:status:ignore submodules 'all'
 
     zgen prezto
 

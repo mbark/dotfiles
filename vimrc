@@ -397,7 +397,7 @@ try
     set undodir=~/.vim/tmp_dirs/undodir
     set undofile
 catch
-endtry 
+endtry
 
 """"""""""""""""""""""""""""""
 " => MRU plugin

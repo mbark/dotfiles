@@ -966,7 +966,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>408 381 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>329 560 796 473 0 0 1920 1080 </string>
+	<string>142 498 796 473 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1920 1080 0 0 1920 1057 </string>
 	<key>New Bookmarks</key>
@@ -2327,7 +2327,7 @@
 			<key>Normal Font</key>
 			<string>Hack-Regular 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -3317,7 +3317,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-10-20T11:40:42Z</date>
+	<date>2016-10-21T15:32:01Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
