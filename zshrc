@@ -9,9 +9,6 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-alias docker-cleanup="/bin/bash ~/dotfiles/scripts/docker-cleanup.sh"
-alias ls="ls -lah --color"
-
 # use ctrl p and n to step through the history
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
@@ -23,7 +20,7 @@ export KEYTIMEOUT=20
 bindkey -M viins 'kj' vi-cmd-mode
 
 # Configuration for fzf
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # fzf auto-completion
@@ -42,4 +39,14 @@ function gi() {
     else
         curl -sL https://www.gitignore.io/api/${(j:,:)@}
     fi
+}
+
+alias docker-cleanup="/bin/bash ~/dotfiles/scripts/docker-cleanup.sh"
+alias case-sensitive-fs="/bin/bash ~/dotfiles/scripts/case-sensitive-fs.sh"
+alias ls="ls -lah --color"
+
+alias tmux-reattach="tmux new-session -s prezto -A"
+
+function lg() {
+    /bin/ls -lah | grep $1
 }
