@@ -50,3 +50,17 @@ alias tmux-reattach="tmux new-session -s prezto -A"
 function lg() {
     /bin/ls -lah | grep $1
 }
+
+# use fzf to find lastpass password
+function pass() {
+    lpass show -c --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g')
+}
+
+function update-all() {
+    set -x
+    (cd ~/dotfiles && git submodule update --recursive --remote)
+    brew update && brew upgrade
+    zgen update
+    npm update -g
+    set +x
+}

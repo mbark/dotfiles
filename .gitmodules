@@ -88,12 +88,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "vim/bundle/ycmd"]
-	path = vim/bundle/ycmd
-	url = https://github.com/Valloric/ycmd
-[submodule "vim/bundle/YouCompleteMe"]
-	path = vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
 [submodule "rust"]
 	path = rust
 	url = https://github.com/rust-lang/rust
@@ -106,3 +100,6 @@
 [submodule "vim/bundle/vim-pathogen"]
 	path = vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
+[submodule "ycmd"]
+	path = ycmd
+	url = https://github.com/Valloric/ycmd
