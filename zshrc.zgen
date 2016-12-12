@@ -43,6 +43,8 @@ if ! zgen saved ; then
     zgen load unixorn/tumult.plugin.zsh
     zgen load zlsun/solarized-man
 
+    zgen oh-my-zsh plugins/docker
+
     # must be loaded at the end of the file
     zgen load zsh-users/zsh-syntax-highlighting
 

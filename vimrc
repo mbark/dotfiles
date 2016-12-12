@@ -117,8 +117,9 @@ set background=dark
 if has("gui_running")
     set guioptions-=T
     set guioptions-=e
-    set t_Co=256
     set guitablabel=%M\ %t
+  else
+      set t_Co=256
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -300,12 +301,6 @@ map <leader>s? z=
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
@@ -441,28 +436,26 @@ map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-multiple-cursors
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:multi_cursor_next_key="\<C-s>"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-airline config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="simple"
-let g:airline_powerline_fonts = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lighline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+\ 'colorscheme': 'Dracula',
+\ 'component': {
+\   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+\ },
+\ 'component_visible_condition': {
+\   'readonly': '(&filetype!="help"&& &readonly)',
+\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
+\ },
+\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+\ }

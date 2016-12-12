@@ -8,6 +8,7 @@
     ~/.zsh: zsh
     ~/.zshrc: zshrc
     ~/.zshenv: zshenv
+    ~/.sshrc: sshrc
     ~/.gitconfig: gitconfig
     ~/.lein: lein
     ~/.bin: bin
@@ -16,5 +17,4 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [git clone https://github.com/tarjoilija/zgen.git ~/.zgen]
   - [python -m pip install --user --upgrade neovim]
