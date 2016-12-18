@@ -28,8 +28,9 @@ source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 # auto completion for sshrc
 compdef sshrc=ssh
 
-# initalize fasd
+# Initialization
 eval "$(fasd --init auto)"
+eval "$(thefuck --alias)"
 
 alias docker-cleanup="/bin/bash ~/dotfiles/scripts/docker-cleanup.sh"
 alias case-sensitive-fs="/bin/bash ~/dotfiles/scripts/case-sensitive-fs.sh"

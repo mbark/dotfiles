@@ -10,6 +10,7 @@ zplug "plugins/emoji", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/gnu-utils", from:oh-my-zsh
+zplug "lib/history", from:oh-my-zsh
 
 zplug "b4b4r07/enhancd"
 zplug "b4b4r07/emoji-cli"
@@ -21,17 +22,17 @@ zplug "supercrabtree/k"
 zplug "unixorn/tumult.plugin.zsh"
 zplug "zlsun/solarized-man"
 zplug "voronkovich/gitignore.plugin.zsh"
+zplug "bric3/nice-exit-code"
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
 
-# zplug 'dracula/zsh', as:theme
-zplug "mashaal/wild-cherry", use:"zsh/wild-cherry.zsh-theme", as:theme
+zplug "$HOME/dotfiles/zsh", from:local, as:theme, use:"zshtheme.zsh-theme"
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install
+        echo; zplug install --verbose
     fi
 fi
 
