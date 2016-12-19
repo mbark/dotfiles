@@ -405,15 +405,15 @@ prompt_char() {
 build_prompt_upper() {
   RETVAL=$?
   prompt_time
-  prompt_dir
-  prompt_status
+  prompt_git
   prompt_end
 }
 
 build_prompt_downer() {
   RETVAL=$?
   prompt_context
-  prompt_git
+  prompt_dir
+  prompt_status
   prompt_end
 }
 

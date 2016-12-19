@@ -5,12 +5,9 @@ zplug "b4b4r07/zplug"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-completions"
 
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/emoji", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/gnu-utils", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
+zplug "plugins/{docker,emoji,git,gnu-utils,vi-mode}", from:oh-my-zsh
+zplug "modules/completion", from:prezto
 
 zplug "b4b4r07/enhancd"
 zplug "b4b4r07/emoji-cli"
@@ -27,13 +24,14 @@ zplug "bric3/nice-exit-code"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
 
-zplug "$HOME/dotfiles/zsh", from:local, as:theme, use:"zshtheme.zsh-theme"
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure", use:"pure.zsh", as:theme
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install --verbose
+        echo; zplug install
     fi
 fi
 
-zplug load
+zplug load --verbose

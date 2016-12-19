@@ -1,8 +1,5 @@
 source ~/dotfiles/zshrc.zplug
 
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
 alias vim="nvim"
 alias vi="nvim"
 export EDITOR="vim"

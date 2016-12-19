@@ -29,7 +29,8 @@ values."
      evil-commentary
      git
      go
-     ivy
+     gtags
+     cscope
      java
      javascript
      typescript
@@ -351,99 +352,4 @@ you should place you code here."
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-term-color-vector
-   [unspecified "#424242" "#EF9A9A" "#C5E1A5" "#FFEE58" "#64B5F6" "#E1BEE7" "#80DEEA" "#E0E0E0"] t)
- '(beacon-color "#ec4780")
- '(compilation-message-face (quote default))
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#839496")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
- '(custom-safe-themes
-   (quote
-    ("427fed191e7a766152e59ef0e2904283f436dbbe259b9ccc04989f3acde50a55" default)))
- '(evil-emacs-state-cursor (quote ("#E57373" bar)) t)
- '(evil-insert-state-cursor (quote ("#E57373" hbar)) t)
- '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
- '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
- '(evil-want-Y-yank-to-eol t)
- '(fci-rule-color "#ECEFF1")
- '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (quote
-    ("#FFEE58" "#C5E1A5" "#80DEEA" "#64B5F6" "#E1BEE7" "#FFCC80")))
- '(highlight-symbol-foreground-color "#E0E0E0")
- '(highlight-tail-colors (quote (("#ec4780" . 0) ("#424242" . 100))))
- '(hl-bg-colors
-   (quote
-    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
- '(hl-fg-colors
-   (quote
-    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
- '(hl-sexp-background-color "#efebe9")
- '(magit-diff-use-overlays nil)
- '(nrepl-message-colors
-   (quote
-    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
- '(package-selected-packages
-   (quote
-    (tide typescript-mode all-the-icons bind-map wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile swiper ivy emoji-cheat-sheet-plus company-emoji inflections magit-popup skewer-mode cider seq request hydra spinner auctex company with-editor git-commit org clojure-mode counsel highlight projectile pcache flyspell-correct auto-complete anaconda-mode iedit git-gutter async go-guru multiple-cursors smartparens go-mode yasnippet rust-mode js2-mode yaml-mode dracula-theme-theme zonokai-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme spaceline paradox js2-refactor hide-comnt helm-ag git-link flycheck-rust expand-region docker docker-tramp column-enforce-mode cargo ace-window eclim ycmd flycheck helm helm-core magit dash zenburn-theme yapfify xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit tablist string-inflection stickyfunc-enhance srefactor sql-indent spacemacs-theme solarized-theme smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restclient restart-emacs request-deferred rainbow-delimiters racer quelpa pyvenv pytest pyenv-mode py-isort pug-mode powerline popwin pip-requirements persp-mode pcre2el pbcopy osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-http neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl json-mode js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flyspell-correct-helm flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump dockerfile-mode disaster diff-hl dactyl-mode cython-mode company-ycmd company-web company-tern company-statistics company-go company-emacs-eclim company-c-headers company-auctex company-anaconda coffee-mode cmake-mode clojure-snippets clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adjust-parens adaptive-wrap ace-link ace-jump-helm-line ac-ispell)))
- '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(pos-tip-background-color "#36473A")
- '(pos-tip-foreground-color "#FFFFC8")
- '(rainbow-identifiers-cie-l*a*b*-lightness 70)
- '(rainbow-identifiers-cie-l*a*b*-saturation 20)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
- '(tabbar-background-color "#353535")
- '(term-default-bg-color "#002b36")
- '(term-default-fg-color "#839496")
- '(vc-annotate-background nil)
- '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#B71C1C")
-     (40 . "#FF5722")
-     (60 . "#FFA000")
-     (80 . "#558b2f")
-     (100 . "#00796b")
-     (120 . "#2196f3")
-     (140 . "#4527A0")
-     (160 . "#B71C1C")
-     (180 . "#FF5722")
-     (200 . "#FFA000")
-     (220 . "#558b2f")
-     (240 . "#00796b")
-     (260 . "#2196f3")
-     (280 . "#4527A0")
-     (300 . "#B71C1C")
-     (320 . "#FF5722")
-     (340 . "#FFA000")
-     (360 . "#558b2f"))))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   (quote
-    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
- '(when
-      (or
-       (not
-        (boundp
-         (quote ansi-term-color-vector)))
-       (not
-        (facep
-         (aref ansi-term-color-vector 0)))))
- '(xterm-color-names
-   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
- '(xterm-color-names-bright
-   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  )
