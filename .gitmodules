@@ -91,12 +91,6 @@
 [submodule "rust"]
 	path = rust
 	url = https://github.com/rust-lang/rust
-[submodule "vim/bundle/dracula-theme"]
-	path = vim/bundle/dracula-theme
-	url = git@github.com:dracula/vim.git
-[submodule "vim/bundle/--force"]
-	path = vim/bundle/--force
-	url = https://github.com/tpope/vim-pathogen
 [submodule "vim/bundle/vim-pathogen"]
 	path = vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
@@ -106,6 +100,7 @@
 [submodule "YCM-Generator"]
 	path = YCM-Generator
 	url = https://github.com/rdnetto/YCM-Generator
+	branch = stable
 [submodule "vim/bundle/tmuxline.vim"]
 	path = vim/bundle/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim
@@ -115,3 +110,6 @@
 [submodule "all-the-icons.el"]
 	path = all-the-icons.el
 	url = https://github.com/domtronn/all-the-icons.el
+[submodule "vim/bundle/dracula-theme"]
+	path = vim/bundle/dracula-theme
+	url = https://github.com/dracula/vim

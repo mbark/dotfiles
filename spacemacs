@@ -261,6 +261,9 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; Avoid having TRAMP hang Spacemacs on startup
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   )
 
 (defun dotspacemacs/user-config ()
@@ -308,6 +311,9 @@ you should place you code here."
   (setq eclim-eclipse-dirs "/Applications/Eclipse.app/Contents/Eclipse")
   (setq eclim-executable "/Applications/Eclipse.app/Contents/Eclipse/eclim")
 
+  ;; Placement for all my repositories
+  (setq magit-repository-directories '("~/repos/" "~/workspace/"))
+
   ;; Use 2 spaces for indent when editing any js file
   (setq-default
    ;; js2-mode
@@ -346,10 +352,24 @@ you should place you code here."
   (setq shell-file-name "/bin/sh")
   (setq projectile-enable-caching t)
 
+  ;; Use a simple bar as separator instead
   (setq powerline-default-separator 'bar)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (iedit deferred which-key use-package tide string-inflection spacemacs-theme pug-mode org-plus-contrib link-hint git-gutter-fringe eyebrowse evil-mc dumb-jump docker bind-key all-the-icons cider clojure-mode auctex tern smartparens highlight ycmd flycheck request helm helm-core yasnippet markdown-mode projectile magit magit-popup git-commit yapfify yaml-mode xterm-color ws-butler with-editor window-numbering web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen typescript-mode toml-mode toc-org tagedit tablist stickyfunc-enhance srefactor sql-indent spaceline smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restclient restart-emacs request-deferred rainbow-delimiters racer queue quelpa pyvenv pytest pyenv-mode py-isort popwin pkg-info pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file ob-http neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum livid-mode live-py-mode linum-relative less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter gh-md ggtags font-lock+ flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dracula-theme dockerfile-mode docker-tramp disaster diminish diff-hl dactyl-mode cython-mode company-ycmd company-web company-tern company-statistics company-go company-emoji company-emacs-eclim company-c-headers company-auctex company-anaconda column-enforce-mode coffee-mode cmake-mode clojure-snippets clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
