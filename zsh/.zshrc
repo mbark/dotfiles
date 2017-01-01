@@ -2,7 +2,7 @@
 PURE_PROMPT_SYMBOL='$(nice_exit_code)❯'
 
 source "$ZPLUG_HOME/init.zsh"
-source "$HOME/dotfiles/zshrc.zplug"
+source "$HOME/dotfiles/zsh/zplug.zsh"
 
 # Editor settings
 alias vim="nvim"

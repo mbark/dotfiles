@@ -2,18 +2,15 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.tmux.conf: tmux.conf
-    ~/.vim: vim
-    ~/.vimrc: vimrc
-    ~/.zsh: zsh
-    ~/.zshrc: zshrc
-    ~/.zshenv: zshenv
-    ~/.sshrc: sshrc
-    ~/.gitconfig: gitconfig
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vimrc: vim/.vimrc
+    ~/.zshrc: zsh/.zshrc
+    ~/.zshenv: zsh/.zshenv
+    ~/.sshrc: ssh/.sshrc
     ~/.lein: lein
-    ~/.bin: bin
-    ~/.spacemacs: spacemacs
-    ~/.gitignore_global: gitignore_global
+    ~/.spacemacs: emacs/.spacemacs
+    ~/.gitconfig: git/.gitconfig
+    ~/.gitignore_global: git/.gitignore_global
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

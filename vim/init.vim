@@ -1,1 +1,1 @@
-/Users/mbark/dotfiles/vimrc
+.vimrc

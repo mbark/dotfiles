@@ -3,7 +3,6 @@ zplug "b4b4r07/zplug"
 zplug "lib/history", from:oh-my-zsh
 zplug "plugins/{emoji,git,gnu-utils,vi-mode}", from:oh-my-zsh
 
-zplug "modules/completion", from:prezto, defer:2
 zplug "zsh-users/zsh-completions"
 zplug "docker/docker", use:"contrib/completion/zsh"
 
@@ -29,6 +28,7 @@ zplug "b4b4r07/zsh-vimode-visual", defer:3
 zplug "mafredri/zsh-async", defer:0
 zplug "sindresorhus/pure", use:"pure.zsh", as:theme
 
-zplug "$HOME/dotfiles/scripts", from:local, use:"alias.sh"
+zplug "$HOME/dotfiles/zsh/modules", from:local, use:"{alias,docker,fuzzy}.zsh"
+zplug "$HOME/dotfiles/zsh/modules", from:local, use:"completions.zsh", defer:2
 
 zplug load

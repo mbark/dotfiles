@@ -12,13 +12,8 @@ confirm() {
     esac
 }
 
-SCRIPTS="$HOME/dotfiles/scripts"
-
-source "$SCRIPTS/docker.sh"
-source "$SCRIPTS/fuzzy.sh"
-
-alias ls="gls -lah --color"
-alias ll="k"
+alias ls="k --almost-all --human --no-vcs"
+alias ll="k --almost-all --human"
 
 alias tmux-reattach="tmux new-session -s work -A"
 
@@ -48,7 +43,7 @@ function update-all() {
 
 function ycmd-generate() {
     local dir=$(pwd)
-    (cd ~/dotfiles/YCM-generator &&
+    (cd ~/dotfiles/dependencies/YCM-generator &&
          env OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ \
              python config_gen.py --verbose --preserve-environment "$dir" "$@")
 }

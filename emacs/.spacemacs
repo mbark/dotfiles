@@ -305,7 +305,7 @@ you should place you code here."
   ;; Enable racer for rust
   (setq-default rust-enable-racer t)
   (setq racer-cmd "~/.cargo/bin/racer")
-  (setq racer-rust-src-path "~/dotfiles/rust/src")
+  (setq racer-rust-src-path "~/dotfiles/dependencies/rust/src")
 
   ;; Eclim configuration for Java layer
   (setq eclim-eclipse-dirs "/Applications/Eclipse.app/Contents/Eclipse")
@@ -339,7 +339,7 @@ you should place you code here."
   ;; python3 build.py --clang-completer
   (setq ycmd-server-command
         (list "python3"
-              (file-truename "~/dotfiles/ycmd/ycmd" )))
+              (file-truename "~/dotfiles/dependencies/ycmd/ycmd" )))
   (setq ycmd-force-semantic-completion t)
 
   ;; Hack till new emacs version is released
