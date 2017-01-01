@@ -7,7 +7,7 @@
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.sshrc: ssh/.sshrc
-    ~/.lein: lein
+    ~/.lein/profiles.clj: lein/profiles.clj
     ~/.spacemacs: emacs/.spacemacs
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore_global: git/.gitignore_global
