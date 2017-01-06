@@ -1,8 +1,9 @@
-# This must be set before loading zplug
+source "$ZPLUG_HOME/init.zsh"
+source "$home/dotfiles/zsh/zplug.zsh"
+
 PURE_PROMPT_SYMBOL='$(nice_exit_code)❯'
 
-source "$ZPLUG_HOME/init.zsh"
-source "$HOME/dotfiles/zsh/zplug.zsh"
+zplug load
 
 # Editor settings
 alias vim="nvim"
@@ -20,6 +21,11 @@ bindkey -M viins 'kj' vi-cmd-mode
 bindkey "^K" up-line-or-search
 bindkey "^J" down-line-or-search
 bindkey '^W' vi-backward-kill-word
+
+# Config for deer
+autoload -U deer
+zle -N deer
+bindkey '^F' deer
 
 # Allow commands to be commented out
 setopt interactivecomments

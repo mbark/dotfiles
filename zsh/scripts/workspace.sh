@@ -17,7 +17,7 @@ MOUNTPOINT=${HOME}/workspace
 VOLUME_NAME=workspace
 
 # volume size
-VOLUME_SIZE=60g
+VOLUME_SIZE=20g
 
 # ---------------------------------------------------------
 # Functionality

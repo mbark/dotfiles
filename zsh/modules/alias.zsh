@@ -20,6 +20,20 @@ alias tmux-reattach="tmux new-session -s work -A"
 # Use the brew installed one to allow usage of the -R flag
 alias ctags="`brew --prefix`/bin/ctags"
 
+function update-zplug() {
+    source "$HOME/dotfiles/zsh/zplug.zsh"
+
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+        zplug load
+    fi
+
+    zplug update
+}
+
 function update-all() {
     echo "Updating submodules in dotfiles"
     (cd ~/dotfiles && git submodule update --recursive --remote)
@@ -28,14 +42,7 @@ function update-all() {
     brew update && brew upgrade
 
     echo "Updating zplug"
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-    fi
-
-    zplug update
+    update-zplug
 
     echo "Updating global npm packages"
     npm update -g

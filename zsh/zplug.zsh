@@ -20,6 +20,7 @@ zplug "djui/alias-tips"
 zplug "zlsun/solarized-man"
 zplug "voronkovich/gitignore.plugin.zsh"
 zplug "bric3/nice-exit-code"
+zplug "Vifon/deer", use:deer
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
@@ -31,5 +32,3 @@ zplug "$HOME/dotfiles/zsh/modules", from:local, \
       use:"{alias,docker,fuzzy,history}.zsh"
 zplug "$HOME/dotfiles/zsh/modules", from:local, \
       use:"completions.zsh", defer:2
-
-zplug load
