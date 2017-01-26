@@ -1,16 +1,14 @@
 source "$ZPLUG_HOME/init.zsh"
-source "$home/dotfiles/zsh/zplug.zsh"
-
-PURE_PROMPT_SYMBOL='$(nice_exit_code)❯'
+source "$HOME/dotfiles/zsh/zplug.zsh"
 
 zplug load
 
 # Editor settings
 alias vim="nvim"
 alias vi="nvim"
-export EDITOR="vim"
-export USE_EDITOR=$EDITOR
-export VISUAL=$EDITOR
+export EDITOR="nvim"
+export USE_EDITOR="$EDITOR"
+export VISUAL="$EDITOR"
 
 # Use vi-mode
 bindkey -v
@@ -36,7 +34,7 @@ eval "$(thefuck --alias)"
 # Fuzzy config variables
 export SKIM_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+# source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # auto completion for sshrc
 compdef sshrc=ssh
