@@ -9,12 +9,13 @@
 *.geometry: 85x20
 
 ! Fonts
-URxvt.font: xft:Input Mono Light:size=10:antialias=true
+URxvt.font: xft:Input Mono Light:size=7:antialias=true
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0200/c800
+URxvt.internalBorder: 25 
 
 ! Rofi
-rofi.font: Input Mono Light 10
+rofi.font: Input Mono Light 16
 rofi.terminal: urxvt
 rofi.matching: fuzzy
 
@@ -75,7 +76,7 @@ rofi.kb-cancel:                      Escape,Control+g,Control+c,Control+bracketl
 *.color15:    #E6E6E6
 
 ! XFT config
-! Xft.dpi: 192
+Xft.dpi: 192
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintfull

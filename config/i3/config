@@ -127,50 +127,30 @@ bindsym $mod+r mode "resize"
 bindsym $mod+d exec rofi -show run
 bindsym $mod+w exec rofi -show window
 
-new_window 1pixel
-
-gaps outer 50
-gaps inner 20
+new_window 1pixel 
 
 # Borders
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
 
 # Gaps
 smart_borders no_gaps
+gaps outer 50
+gaps inner 20
 
-# Power control mode
-set $power_control "[l]ock log[o]ut [s]uspend [h]ibernate [r]eboot [p]oweroff"
-mode $power_control {
-      bindsym l exec bash ~/dotfiles/zsh/scripts/lock.sh; mode "default"
-      bindsym o exec i3-msg exit; mode "default"
-      bindsym s exec systemctl suspend; mode "default"
-      bindsym h exec systemctl hibernate; mode "default"
-      bindsym r exec systemctl reboot; mode "default"
-      bindsym p exec systemctl poweroff; mode "default"
+# Power control
+bindsym $mod+Shift+p exec bash ~/dotfiles/zsh/scripts/poweropts.sh
 
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-}
-bindsym $mod+Shift+p mode $power_control
-
-assign[class="URvxt"] $workspace1
-assign[class="Emacs"] $workspace2
-assign[class="Google-chrome"] $workspace9
-assign[class="Firefox"] $workspace9
-
-exec urxvt
-exec emacs
-
+exec --no-startup-id mopidy
 exec --no-startup-id compton --config "$HOME/dotfiles/config/compton/config"
 exec --no-startup-id polybar -r top
+exec --no-startup-id polybar -r bottom
 
-exec_always --no-startup-id feh --bg-fill "$HOME/Wallpapers/space.jpg"
+exec_always --no-startup-id feh --bg-fill "$HOME/Wallpapers/Doubledeca.png"
 
 # Use both shifts pressed simultaneously to switch keyboard layout
-exec_always setxkbmap -layout us,se -option grp:shifts_toggle
+exec_always --no-startup-id setxkbmap -layout us,se -option grp:shifts_toggle
 # Make Caps Lock a Alt key
-exec_always setxkbmap -option alt:nocaps
-
+exec_always --no-startup-id setxkbmap -option alt:nocaps
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
