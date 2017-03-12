@@ -2,11 +2,11 @@
 
 function docker-cleanup() {
     # remove exited containers
-    docker ps --filter status=dead --filter status=exited -aq | gxargs -r docker rm -v
+    docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v
     # remove unused images
-    docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | gxargs -r docker rmi
+    docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r docker rmi
     # remove unused volumes
-    docker volume ls -qf dangling=true | gxargs -r docker volume rm
+    docker volume ls -qf dangling=true | xargs -r docker volume rm
 }
 
 function docker-cleanall() {

@@ -13,7 +13,6 @@ orange = #8BE9FD
 yellow = #F1FA8C
 
 [bar/master]
-monitor=eDP1
 width = 100%
 height = 40
 separator = " "
@@ -21,7 +20,7 @@ background = ${colors.transparent}
 foreground = ${colors.foreground}
 underline-size = 0
 overline-size = 0
-font-0 = "InputMono:weight=light:size=12"
+font-0 = "InputMono:weight=light:size=14"
 
 [bar/top]
 inherit = bar/master
@@ -59,7 +58,8 @@ accumulate-stats = true
 
 [module/wifi]
 inherit = module/network
-format-connected = connected to wifi <label-connected>
+format-connected = connected to <label-connected>
+format-disconnected = <label-disconnected> from the internet
 
 label-connected = %{B#FF79C6} %essid% %{B-}
 label-disconnected = %{B#FF5555} dsconnected %{B-}
@@ -85,10 +85,10 @@ battery = BAT0
 adapter = ADP1
 
 time-format = %H:%M
-format-charging = battery is at <label-charging> and increasing
+format-charging = battery is at <label-charging>
 label-charging = %{B#FF79C6} %percentage:2%% %{B-}
 
-format-discharging = battery is at <label-discharging> and decreasing
+format-discharging = battery is at <label-discharging>
 label-discharging = %{B#FF79C6} %percentage:2%% %{B-}
 
 format-full = battery is full

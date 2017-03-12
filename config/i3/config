@@ -127,30 +127,24 @@ bindsym $mod+r mode "resize"
 bindsym $mod+d exec rofi -show run
 bindsym $mod+w exec rofi -show window
 
-new_window 1pixel 
+new_window pixel 1
 
 # Borders
 for_window [class="^.*"] border pixel 0
 
 # Gaps
-smart_borders no_gaps
-gaps outer 50
+# smart_borders no_gaps
+gaps outer 20
 gaps inner 20
 
 # Power control
 bindsym $mod+Shift+p exec bash ~/dotfiles/zsh/scripts/poweropts.sh
 
-exec --no-startup-id mopidy
 exec --no-startup-id compton --config "$HOME/dotfiles/config/compton/config"
 exec --no-startup-id polybar -r top
 exec --no-startup-id polybar -r bottom
 
 exec_always --no-startup-id feh --bg-fill "$HOME/Wallpapers/Doubledeca.png"
-
-# Use both shifts pressed simultaneously to switch keyboard layout
-exec_always --no-startup-id setxkbmap -layout us,se -option grp:shifts_toggle
-# Make Caps Lock a Alt key
-exec_always --no-startup-id setxkbmap -option alt:nocaps
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -161,8 +155,12 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
+# Keyboad backlight controls
+bindsym XF86KbdBrightnessDown exec kbdlight down 5%
+bindsym XF86KbdBrightnessUp exec kbdlight up 5%
+
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec mpc play
+bindsym XF86AudioPause exec mpc pause
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc previous
