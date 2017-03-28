@@ -7,6 +7,7 @@ zplug "plugins/gnu-utils", from:oh-my-zsh
 
 zplug "zsh-users/zsh-completions"
 zplug "docker/docker", use:"contrib/completion/zsh"
+zplug "docker/compose", use:"contrib/completion/zsh"
 
 zplug "supercrabtree/k"
 
@@ -14,8 +15,8 @@ zplug "chrissicool/zsh-256color"
 zplug "djui/alias-tips"
 zplug "zlsun/solarized-man"
 zplug "voronkovich/gitignore.plugin.zsh"
-zplug "bric3/nice-exit-code"
-zplug "Vifon/deer", use:deer
+# zplug "Vifon/deer", use:deer
+zplug "~/repos/deer", from:local, use:deer
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3

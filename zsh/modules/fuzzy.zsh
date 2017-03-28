@@ -23,3 +23,7 @@ function fuzzy-kill() {
         kill -${1:-"$killcode"} $pid
     fi
 }
+
+function fuzzy-docker-clean() {
+    docker images | tail -n +2 | sort | sk -m --reverse | awk '{print $3}' | xargs -r -I % docker rmi % || true
+}

@@ -38,3 +38,5 @@ source "/usr/share/fzf/key-bindings.zsh"
 
 # auto completion for sshrc
 compdef sshrc=ssh
+
+source "$HOME/workspace/monorepo/docker-alias.sh"
