@@ -34,7 +34,7 @@ eval "$(thefuck --alias)"
 # Fuzzy config variables
 export SKIM_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-# source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+source "/usr/share/fzf/key-bindings.zsh"
 
 # auto completion for sshrc
 compdef sshrc=ssh

@@ -9,7 +9,7 @@
 *.geometry: 85x20
 
 ! Fonts
-URxvt.font: xft:Input Mono Light:size=8:antialias=true
+URxvt.font: xft:Input Mono Light:size=7:antialias=true
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0200/c800
 URxvt.internalBorder: 25 

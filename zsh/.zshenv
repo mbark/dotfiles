@@ -5,6 +5,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin"
 export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:/usr/bin/core_perl"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -22,3 +23,5 @@ if [[ ! "$MANPATH" == */usr/local/opt/fzf/man* && -d "/usr/local/opt/fzf/man" ]]
     export MANPATH="$MANPATH:/usr/local/opt/fzf/man"
 fi
 
+source /home/mbark/repos/monorepo/docker-alias.sh
+export MONOREPO_ROOT=/home/mbark/repos/monorepo
