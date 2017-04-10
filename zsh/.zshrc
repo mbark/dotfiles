@@ -34,9 +34,14 @@ eval "$(thefuck --alias)"
 # Fuzzy config variables
 export SKIM_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-source "/usr/share/fzf/key-bindings.zsh"
 
 # auto completion for sshrc
 compdef sshrc=ssh
 
-source "$HOME/workspace/monorepo/docker-alias.sh"
+if [[ $(uname) == "Darwin" ]] ; then
+    source "$FZF_PATH/shell/key-bindings.zsh"
+else
+    source "$FZF_PATH/key-bindings.zsh"
+fi
+
+source "$HOME/repos/monorepo/docker-alias.sh"
