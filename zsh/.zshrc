@@ -20,11 +20,6 @@ bindkey "^K" up-line-or-search
 bindkey "^J" down-line-or-search
 bindkey '^W' vi-backward-kill-word
 
-# Config for deer
-autoload -U deer
-zle -N deer
-bindkey '^F' deer
-
 # Allow commands to be commented out
 setopt interactivecomments
 
@@ -44,4 +39,5 @@ else
     source "$FZF_PATH/key-bindings.zsh"
 fi
 
-source "$HOME/repos/monorepo/docker-alias.sh"
+export MONOREPO_ROOT="$HOME/repos/monorepo"
+source "$MONOREPO_ROOT/docker-alias.sh"

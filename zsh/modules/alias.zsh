@@ -54,9 +54,9 @@ function update-all() {
     npm update -g
 
     # Remember:
-    # if we update ycmd we need to rebuild it
+    # if we update ycmd we need to rebuild it:
     # python3 build.py --clang-completer --racer-completer --tern-completer
-    # and update emacs-ycmd:
+    # and update emacs-ycmd
     # if we update imagmagick sometimes we might need to rebuild emacs as well
     # brew uninstall emacs-plus && brew install emacs-plus
 }
@@ -67,4 +67,11 @@ function ycmd-generate() {
     (cd ~/dotfiles/dependencies/YCM-generator &&
          env OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ \
              python config_gen.py --verbose --preserve-environment "$dir" $@)
+}
+
+function docker-cleanall() {
+    if confirm ; then
+        docker rm $(docker ps -a -q)
+        docker rmi -f $(docker images -q)
+    fi
 }
