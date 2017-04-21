@@ -4,7 +4,6 @@
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/.vimrc
-    ~/.config/nvim/init.vim: vim/init.vim
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.sshrc: ssh/.sshrc
@@ -12,11 +11,12 @@
     ~/.spacemacs: emacs/.spacemacs
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore_global: git/.gitignore_global
-    ~/.config/compton/config: config/compton/config
-    ~/.config/i3/config: config/i3/config
-    ~/.config/polybar/config: config/polybar/config
-    ~/.Xresources: .Xresources
-    ~/.xinitrc: .xinitrc
+    ~/.config/nvim/init.vim: vim/.vimrc
+    # ~/.config/compton/config: config/compton/config
+    # ~/.config/i3/config: config/i3/config
+    # ~/.config/polybar/config: config/polybar/config
+    # ~/.Xresources: .Xresources
+    # ~/.xinitrc: .xinitrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

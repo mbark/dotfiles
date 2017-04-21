@@ -35,7 +35,6 @@ values."
      (shell :variables shell-default-term-shell "/bin/bash")
      auto-completion
      clojure
-     cscope
      docker
      emacs-lisp
      emoji
@@ -43,7 +42,7 @@ values."
      evil-commentary
      git
      go
-     java
+     (java :variables java-backend 'meghanada)
      javascript
      latex
      lua
@@ -80,7 +79,7 @@ values."
      editorconfig
      groovy-mode
      rpm-spec-mode
-     string-inflection
+     rtags
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -390,10 +389,6 @@ you should place you code here."
   (setq racer-cmd "~/.cargo/bin/racer")
   (setq racer-rust-src-path "~/dotfiles/dependencies/rust/src")
 
-  ;; Eclim configuration for Java layer
-  (setq eclim-eclipse-dirs "/Applications/Eclipse.app/Contents/Eclipse")
-  (setq eclim-executable "/Applications/Eclipse.app/Contents/Eclipse/eclim")
-
   ;; Placement for all my repositories
   (setq magit-repository-directories '("~/repos/" "~/workspace/"))
 
@@ -448,16 +443,27 @@ you should place you code here."
 
   ;; This speeds up magit considerably for larger repos
   (setq magit-refresh-status-buffer nil)
-
-  ;; some string inflection stuff
-  (evil-leader/set-key
-    "xic" 'string-inflection-lower-camelcase
-    "xiC" 'string-inflection-camelcase
-    "xi_" 'string-inflection-underscore
-    "xiu" 'string-inflection-upcase
-    "xik" 'string-inflection-kebab-case
-    "xi TAB" 'string-inflection-all-cycle)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (cmake-ide levenshtein irony flycheck-rtags company-rtags helm-rtags rtags helm-gtags ggtags yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tide tagedit symon swift-mode string-inflection stickyfunc-enhance srefactor sql-indent spaceline smeargle slim-mode shell-pop scss-mode sass-mode rpm-spec-mode reveal-in-osx-finder restclient-helm restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-restclient ob-http nginx-mode neotree multi-term move-text mmm-mode meghanada markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl js2-refactor js-doc insert-shebang info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag groovy-mode groovy-imports gradle-mode google-translate golden-ratio go-rename go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help ensime emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dockerfile-mode docker disaster diff-hl dactyl-mode cython-mode company-ycmd company-web company-tern company-statistics company-shell company-restclient company-go company-emoji company-emacs-eclim company-c-headers company-auctex company-anaconda column-enforce-mode coffee-mode cmake-mode clojure-snippets clj-refactor clean-aindent-mode clang-format cider-eval-sexp-fu cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

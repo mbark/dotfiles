@@ -20,6 +20,9 @@ bindkey "^K" up-line-or-search
 bindkey "^J" down-line-or-search
 bindkey '^W' vi-backward-kill-word
 
+# Insert autosuggestion
+bindkey '^O' autosuggest-accept
+
 # Allow commands to be commented out
 setopt interactivecomments
 

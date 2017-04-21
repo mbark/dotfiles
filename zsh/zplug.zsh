@@ -15,9 +15,11 @@ zplug "chrissicool/zsh-256color"
 zplug "djui/alias-tips"
 zplug "zlsun/solarized-man"
 zplug "voronkovich/gitignore.plugin.zsh"
+zplug "hlissner/zsh-autopair", defer:2
 
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
+zplug "zsh-users/zsh-autosuggestions", defer:3
 
 zplug "mafredri/zsh-async", defer:0
 zplug "sindresorhus/pure", use:"pure.zsh", as:theme
