@@ -1,15 +1,14 @@
 zplug "b4b4r07/zplug"
 
-zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
-zplug "plugins/emoji", from:oh-my-zsh
-zplug "plugins/gnu-utils", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh, lazy:true
 
 zplug "zsh-users/zsh-completions"
 zplug "docker/docker", use:"contrib/completion/zsh"
 zplug "docker/compose", use:"contrib/completion/zsh"
 
 zplug "supercrabtree/k"
+zplug "lukechilds/zsh-nvm"
 
 zplug "chrissicool/zsh-256color"
 zplug "djui/alias-tips"

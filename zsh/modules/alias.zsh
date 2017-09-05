@@ -50,8 +50,8 @@ function update-all() {
     echo "Updating zplug"
     update-zplug
 
-    echo "Updating global npm packages"
-    npm update -g
+    echo "Updating global javascript packages"
+    yarn global upgrade
 
     # Remember:
     # if we update ycmd we need to rebuild it:

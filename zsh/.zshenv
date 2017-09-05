@@ -8,8 +8,11 @@ export PATH="$HOME/bin:$PATH"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
-export RUST_SRC_PATH="$HOME/dotfiles/dependencies/rust/src"
-export ECLIPSE_HOME="/Applications/Eclipse.app/Contents/Eclipse"
+export RUST_SRC_PATH="$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
+
+if [ -f "/usr/libexec/java_home" ] ; then
+    export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+fi
 
 if [[ $(uname) == "Darwin" ]] ; then
     FZF_PATH="/usr/local/opt/fzf/"
@@ -23,3 +26,5 @@ fi
 
 export PATH="$PATH:$FZF_PATH/bin"
 export MANPATH="$MANPATH:$FZF_PATH/man"
+
+skip_global_compinit=1

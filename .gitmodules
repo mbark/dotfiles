@@ -17,3 +17,6 @@
 [submodule "all-the-icons.el"]
 	path = emacs/all-the-icons.el
 	url = https://github.com/domtronn/all-the-icons.el
+[submodule "dependencies/iterm"]
+	path = dependencies/iterm
+	url = https://github.com/dracula/iterm.git
