@@ -2,9 +2,14 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin"
-export PATH="/Library/TeX/texbin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:/Library/TeX/texbin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+
+export GOPATH="$HOME/go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 

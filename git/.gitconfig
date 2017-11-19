@@ -2,7 +2,6 @@
 	email = martin.barksten@gmail.com
 	name = Martin Barksten
 [core]
-	excludesfile = /Users/martin.barksten/.gitignore_global
 	autocrlf = input
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [push]

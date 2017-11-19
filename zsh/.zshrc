@@ -1,10 +1,5 @@
 export NVM_LAZY_LOAD=true
 
-source "$ZPLUG_HOME/init.zsh"
-source "$HOME/dotfiles/zsh/zplug.zsh"
-
-zplug load
-
 # Editor settings
 alias vim="nvim"
 alias vi="nvim"
@@ -27,6 +22,8 @@ bindkey '^W' vi-backward-kill-word
 bindkey "^[f" forward-word
 bindkey "^[b" backward-word
 bindkey "^[w" backward-kill-word
+bindkey "^F"  forward-char
+bindkey "^B"  backward-char
 
 # Insert autosuggestion
 bindkey '^O' autosuggest-accept
@@ -35,11 +32,16 @@ bindkey '^O' autosuggest-accept
 export SKIM_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-# autocompletion for sshrc
-compdef sshrc=ssh
+### Added by Zplugin's installer
+source "$HOME/.zplugin/bin/zplugin.zsh"
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin's installer chunk
 
-# autocompletion for yarnhack (used with lerna)
-compdef yarnhack=yarn
+source "$HOME/dotfiles/zsh/zplugin.zsh"
+
+autoload -Uz compinit
+compinit
 
 if [[ $(uname) == "Darwin" ]] ; then
     source "$FZF_PATH/shell/key-bindings.zsh"

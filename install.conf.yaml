@@ -10,7 +10,7 @@
     ~/.lein/profiles.clj: lein/profiles.clj
     ~/.spacemacs: emacs/.spacemacs
     ~/.gitconfig: git/.gitconfig
-    ~/.gitignore_global: git/.gitignore_global
+    ~/.config/git/ignore: git/.gitignore_global
     ~/.config/nvim/init.vim: vim/.vimrc
     # ~/.config/compton/config: config/compton/config
     # ~/.config/i3/config: config/i3/config

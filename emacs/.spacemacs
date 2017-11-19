@@ -30,7 +30,9 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(
+     c-c++
+     html
      (shell :variables shell-default-term-shell "/bin/bash")
      (auto-completion :variables
                       auto-completion-enable-help-tooltip 'manual
@@ -64,6 +66,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     add-node-modules-path
      adjust-parens
      all-the-icons
      dracula-theme
@@ -409,7 +412,8 @@ you should place you code here."
 
   ;; Enable racer for rust
   (setq-default rust-enable-racer t)
-  (setq racer-cmd "~/.cargo/bin/racer")
+  (setq racer-cmd (file-truename "~/.cargo/bin/racer"))
+  (setq racer-rust-src-path (file-truename "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"))
 
   ;; Always enable editorconfig
   (editorconfig-mode t)
@@ -429,7 +433,7 @@ you should place you code here."
 
   ;; These might speed up projectile for larger projects by using the standard shell and caching
   (setq shell-file-name "/bin/sh")
-  (setq projectile-enable-caching t)
+  ;; (setq projectile-enable-caching t)
 
   ;; Use a simple bar as separator instead
   (setq powerline-default-separator 'bar)
@@ -447,9 +451,11 @@ you should place you code here."
   ;; Placement for all git+repositories
   (setq magit-repository-directories '("~/repos/" "~/workspace/"))
 
-  ;; The emacs-lisp layer appears to break doing "cc" in a magit-status buffer
-  ;; so I've bound gC which still work
-  (spacemacs/set-leader-keys "gC" 'magit-commit)
+  (eval-after-load 'js-mode
+    '(add-hook 'js-mode-hook #'add-node-modules-path))
+
+  (eval-after-load 'js2-mode
+    '(add-hook 'js2-mode-hook #'add-node-modules-path))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -466,7 +472,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm helm-core magit markdown-mode cider macrostep evil-cleverparens elisp-slime-nav auto-compile packed yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tide tagedit symon string-inflection stickyfunc-enhance srefactor sql-indent spaceline smeargle slim-mode shell-pop scss-mode sayid sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy password-generator paradox osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file nvm nginx-mode neotree multi-term move-text mmm-mode meghanada markdown-toc magit-gitflow lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl js2-refactor js-doc insert-shebang info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag gradle-mode google-translate golden-ratio godoctor go-rename go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-args evil-anzu eshell-z eshell-prompt-extras esh-help ensime emmet-mode editorconfig dumb-jump dracula-theme dockerfile-mode docker dactyl-mode cython-mode company-web company-tern company-statistics company-shell company-quickhelp company-go company-emacs-eclim company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary all-the-icons aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (add-node-modules-path anaconda-mode eclim tern smartparens goto-chg projectile window-purpose magit-popup git-commit with-editor async markdown-mode company yasnippet hydra rust-mode haml-mode cider dash realgud test-simple loc-changes load-relative disaster company-c-headers cmake-mode cmake-ide levenshtein clang-format inflections iedit helm helm-core multiple-cursors magit flycheck s wgrep smex ivy-purpose ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tide tagedit symon string-inflection stickyfunc-enhance srefactor sql-indent spaceline smeargle slim-mode shell-pop scss-mode sayid sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy password-generator paradox osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file nvm nginx-mode neotree multi-term move-text mmm-mode meghanada markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl js2-refactor js-doc insert-shebang info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag gradle-mode google-translate golden-ratio godoctor go-rename go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help ensime emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dockerfile-mode docker dactyl-mode cython-mode company-web company-tern company-statistics company-shell company-quickhelp company-go company-emacs-eclim company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
