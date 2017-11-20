@@ -1,5 +1,7 @@
 export NVM_LAZY_LOAD=true
 
+export WORDCHARS=''
+
 # Editor settings
 alias vim="nvim"
 alias vi="nvim"
@@ -25,11 +27,7 @@ bindkey "^[w" backward-kill-word
 bindkey "^F"  forward-char
 bindkey "^B"  backward-char
 
-# Insert autosuggestion
-bindkey '^O' autosuggest-accept
-
 # Fuzzy config variables
-export SKIM_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 ### Added by Zplugin's installer

@@ -25,5 +25,6 @@ zplugin snippet "$HOME/dotfiles/zsh/modules/completions.zsh"
 zplugin snippet "$HOME/dotfiles/zsh/modules/fuzzy.zsh"
 zplugin snippet "$HOME/dotfiles/zsh/modules/history.zsh"
 
+zplugin ice wait'1' atload'_zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zdharma/fast-syntax-highlighting

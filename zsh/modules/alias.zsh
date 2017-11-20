@@ -28,14 +28,14 @@ function git-delete-branches {
 
 function update-all() {
     echo "Updating submodules in dotfiles"
-    (cd ~/dotfiles && git submodule update --recursive --remote)
+    (cd ~/dotfiles && git submodule update --init --recursive)
 
     echo "Updating brew formulas"
     brew update && brew upgrade
 
     echo "Updating zplugin"
     zplugin self-update
-    zpluing update --all
+    zplugin update --all
 
     echo "Updating global javascript packages"
     yarn global upgrade

@@ -31,19 +31,20 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     c-c++
      html
      (shell :variables shell-default-term-shell "/bin/bash")
      (auto-completion :variables
                       auto-completion-enable-help-tooltip 'manual
                       auto-completion-enable-sort-by-usage t)
      clojure
+     dash
      docker
-     emacs-lisp ;; emacs-lisp is disabled as it breaks magit...
+     emacs-lisp
      evil-cleverparens
      evil-commentary
      git
      go
+     groovy
      (java :variables java-backend 'meghanada)
      javascript
      markdown
@@ -59,6 +60,7 @@ values."
      (typescript :variables typescript-fmt-tool 'typescript-formatter)
      vimscript
      yaml
+     xkcd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -71,6 +73,9 @@ values."
      all-the-icons
      dracula-theme
      nvm
+     rainbow-mode
+     ivy-rich
+     prettier-js
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -103,6 +108,13 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
+   ;; If non-nil then Spacelpa repository is the primary source to install
+   ;; a locked version of packages. If nil then Spacemacs will install the lastest
+   ;; version of packages from MELPA. (default nil)
+   dotspacemacs-use-spacelpa nil
+   ;; If non-nil then verify the signature for downloaded Spacelpa archives.
+   ;; (default nil)
+   dotspacemacs-verify-spacelpa-archives nil
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -110,8 +122,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-check-for-update nil
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
-   ;; to `emacs-version'. (default nil)
-   dotspacemacs-elpa-subdirectory nil
+   ;; to `emacs-version'. (default 'emacs-version)
+   dotspacemacs-elpa-subdirectory 'emacs-version
    ;; One of `vim', `emacs' or `hybrid'.
    ;; `hybrid' is like `vim' except that `insert state' is replaced by the
    ;; `hybrid state' with `emacs' key bindings. The value can also be a list
@@ -144,6 +156,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(dracula
+                         nord
                          spacemacs-dark
                          spacemacs-light)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -294,11 +307,11 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-folding-method 'evil
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode 't
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis 't
+   dotspacemacs-smart-closing-parenthesis t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -376,7 +389,16 @@ you should place you code here."
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word))
   (with-eval-after-load 'helm
-    (define-key helm-map (kbd "C-w") 'evil-delete-backward-word))
+    (define-key helm-map (kbd "C-w") 'evil-delete-backward-word)
+    (setq helm-buffer-max-length nil))
+
+  ;; Configuration for ivy-rich
+  (with-eval-after-load 'ivy
+    (setq ivy-rich-abbreviate-paths t
+          ivy-virtual-abbreviate 'full
+          ivy-rich-switch-buffer-align-virtual-buffer t)
+    (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer))
+
 
   ;; Evil configuration
   (setq evil-move-cursor-back nil)
@@ -402,7 +424,6 @@ you should place you code here."
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
   ;; Use adjust parens mode in emacs and clojure
-  (require 'adjust-parens)
   (add-hook 'emacs-lisp-mode-hook #'adjust-parens-mode)
   (add-hook 'clojure-mode-hook #'adjust-parens-mode)
 
@@ -431,9 +452,8 @@ you should place you code here."
   ;; Automatically load any extra ycm files (useful since I generate with ycmd-generator)
   (setq ycmd-extra-conf-handler 'load)
 
-  ;; These might speed up projectile for larger projects by using the standard shell and caching
+  ;; These might speed up projectile for larger projects by using the standard shell
   (setq shell-file-name "/bin/sh")
-  ;; (setq projectile-enable-caching t)
 
   ;; Use a simple bar as separator instead
   (setq powerline-default-separator 'bar)
@@ -451,11 +471,34 @@ you should place you code here."
   ;; Placement for all git+repositories
   (setq magit-repository-directories '("~/repos/" "~/workspace/"))
 
-  (eval-after-load 'js-mode
-    '(add-hook 'js-mode-hook #'add-node-modules-path))
+  ;; add node modules and enable prettier-js for web development
+  (add-hook 'js2-mode-hook #'add-node-modules-path)
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
 
-  (eval-after-load 'js2-mode
-    '(add-hook 'js2-mode-hook #'add-node-modules-path))
+  (add-hook 'typescript-mode-hook #'add-node-modules-path)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
+
+  ;; Enable smartparens in web-mode (otherwise, you can't insert closing parens)
+  (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
+
+  ;; prefer using eslint from node_modules over a global install
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                          root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
+  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+  ;; disable warnings about trailing comma as this is obnoxious, handled better
+  ;; by lint-tools like eslint and mostly irrelevant
+  (setq-default js2-strict-trailing-comma-warning nil)
+
+  ;; prefer single quote for prettier-js
+  (setq prettier-js-args '("--single-quote" "true"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -472,7 +515,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (add-node-modules-path anaconda-mode eclim tern smartparens goto-chg projectile window-purpose magit-popup git-commit with-editor async markdown-mode company yasnippet hydra rust-mode haml-mode cider dash realgud test-simple loc-changes load-relative disaster company-c-headers cmake-mode cmake-ide levenshtein clang-format inflections iedit helm helm-core multiple-cursors magit flycheck s wgrep smex ivy-purpose ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tide tagedit symon string-inflection stickyfunc-enhance srefactor sql-indent spaceline smeargle slim-mode shell-pop scss-mode sayid sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy password-generator paradox osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file nvm nginx-mode neotree multi-term move-text mmm-mode meghanada markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl js2-refactor js-doc insert-shebang info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag gradle-mode google-translate golden-ratio godoctor go-rename go-guru go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help ensime emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dockerfile-mode docker dactyl-mode cython-mode company-web company-tern company-statistics company-shell company-quickhelp company-go company-emacs-eclim company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (add-node-modules-path yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tide typescript-mode tagedit symon string-inflection stickyfunc-enhance srefactor sql-indent spaceline powerline smeargle slim-mode shell-pop scss-mode sayid sass-mode reveal-in-osx-finder restart-emacs rainbow-mode rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pip-requirements persp-mode pcre2el pbcopy password-generator paradox overseer osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file nvm nord-theme nginx-mode neotree nameless mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint less-css-mode launchctl js2-refactor js2-mode js-doc ivy-rich ivy insert-shebang info+ indent-guide impatient-mode htmlize simple-httpd hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode groovy-mode groovy-imports pcache gradle-mode google-translate golden-ratio godoctor go-tag go-rename go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-rust flycheck-pos-tip flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit magit git-commit ghub let-alist with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-commentary evil-cleverparens smartparens evil-args evil-anzu anzu evil goto-chg undo-tree eshell-z eshell-prompt-extras esh-help ensime sbt-mode scala-mode emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diminish dash-at-point dactyl-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company-go go-mode company-emacs-eclim eclim company-anaconda company column-enforce-mode coffee-mode clojure-snippets clojure-cheatsheet clj-refactor hydra inflections edn multiple-cursors paredit peg clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue pkg-info clojure-mode epl cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed anaconda-mode pythonic f dash s all-the-icons memoize font-lock+ aggressive-indent adjust-parens adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
