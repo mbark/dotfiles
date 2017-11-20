@@ -1,9 +1,3 @@
-function j() {
-    eval "$(fasd --init auto)"
-    local dir
-    dir="$(fasd -Rdl "$1" | sk +m)" && cd "${dir}" || return 1
-}
-
 function fuzzy-kill() {
     local pid=$(ps -ef | sed 1d | fzf | awk '{print $2}')
 

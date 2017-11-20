@@ -26,20 +26,6 @@ function git-delete-branches {
     git branch --merged | egrep -v "(^\*|master)" | xargs -r git branch -d
 }
 
-function update-zplug() {
-    source "$HOME/dotfiles/zsh/zplug.zsh"
-
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-        zplug load
-    fi
-
-    zplug update
-}
-
 function update-all() {
     echo "Updating submodules in dotfiles"
     (cd ~/dotfiles && git submodule update --recursive --remote)
@@ -47,8 +33,9 @@ function update-all() {
     echo "Updating brew formulas"
     brew update && brew upgrade
 
-    echo "Updating zplug"
-    update-zplug
+    echo "Updating zplugin"
+    zplugin self-update
+    zpluing update --all
 
     echo "Updating global javascript packages"
     yarn global upgrade
@@ -69,9 +56,3 @@ function ycmd-generate() {
              python config_gen.py --verbose --preserve-environment "$dir" $@)
 }
 
-function docker-cleanall() {
-    if confirm ; then
-        docker rm $(docker ps -a -q)
-        docker rmi -f $(docker images -q)
-    fi
-}
