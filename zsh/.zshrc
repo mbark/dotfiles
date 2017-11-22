@@ -41,7 +41,12 @@ autoload -Uz _zplugin
 source "$HOME/dotfiles/zsh/zplugin.zsh"
 
 autoload -Uz compinit
-compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' "$HOME/.zcompdump") ]; then
+    compinit -d "$HOME/.zcompdump"
+else
+    compinit -C
+fi
+
 
 if [[ $(uname) == "Darwin" ]] ; then
     source "$FZF_PATH/shell/key-bindings.zsh"
