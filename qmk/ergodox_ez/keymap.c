@@ -4,9 +4,13 @@
 #include "action_layer.h"
 #include "version.h"
 
+// Makes tap and hold keys work better for fast typers who don't want tapping term set above 500
+#define PERMISSIVE_HOLD
+
 #define TAB_LWR LT(LOWER, KC_TAB)
 #define GUI_SPC MT(MOD_RGUI, KC_SPC)
 #define SFT_ENT MT(MOD_LSFT, KC_ENT)
+#define FN_ENT  LT(RAISE, KC_ENT)
 #define FN_ESC  LT(NAV, KC_ESC)
 #define FN_QUOT LT(NAV, KC_QUOT)
 
@@ -17,7 +21,7 @@
 #define LOWER 2
 #define RAISE 3
 #define NAV 4
-#define FUN 4
+#define FUN 5
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -29,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Esc    |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   "    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   | Enter  |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |  /   |Ent/Sft |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | Ctrl | TglKb|      | Alt  | CMD  |                                       |LLower| LAlt |      | TSweL| Ctrl |
  *   `----------------------------------'                                       `----------------------------------'
@@ -51,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                                                        KC_TRNS, KC_TRNS,
                                                                                 KC_TRNS,
-                                                            MO(RAISE), TAB_LWR, KC_TRNS,
+                                                          MO(RAISE), MO(LOWER), KC_TRNS,
 
         // right hand
         KC_TRNS,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,

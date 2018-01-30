@@ -27,6 +27,16 @@ bindkey "^[w" backward-kill-word
 bindkey "^F"  forward-char
 bindkey "^B"  backward-char
 
+# vim-surround-like functionality
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -a cs change-surround
+bindkey -a ds delete-surround
+bindkey -a ys add-surround
+bindkey -M visual s add-surround
+
 # Fuzzy config variables
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
