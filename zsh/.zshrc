@@ -40,11 +40,9 @@ bindkey -M visual s add-surround
 # Fuzzy config variables
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-### Added by Zplugin's installer
 source "$HOME/.zplugin/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
 
 source "$HOME/dotfiles/zsh/zplugin.zsh"
 

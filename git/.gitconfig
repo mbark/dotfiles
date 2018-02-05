@@ -6,3 +6,6 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
 	default = simple
+[alias]
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	delete-merged-branches = "!git branch --merged | grep -v '(\\*|master)' | xargs git branch -d"
