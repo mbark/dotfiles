@@ -11,6 +11,10 @@
     ~/.gitconfig: git/.gitconfig
     ~/.config/git/ignore: git/.gitignore_global
     ~/.config/nvim/init.vim: vim/.vimrc
+    ~/.emacs.d/init.el: emacs/doom/init.el
+    ~/.emacs.d/modules/private/mbark: emacs/doom/modules/private/mbark
+    ~/.emacs.d/modules/private/typescript: emacs/doom/modules/private/typescript
+    ~/.emacs.d/modules/private/go: emacs/doom/modules/private/go
     # ~/.config/compton/config: config/compton/config
     # ~/.config/i3/config: config/i3/config
     # ~/.config/polybar/config: config/polybar/config
