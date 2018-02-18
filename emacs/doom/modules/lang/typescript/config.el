@@ -1,16 +1,13 @@
 ;;; lang/typescript/config.el -*- lexical-binding: t; -*-
 
-(cond ((featurep! +prettier-js)
-       (def-package! prettier-js
-         :config
-         (add-hook 'typescript-mode-hook #'prettier-js-mode))))
-
 (def-package! prettier-js)
 
 (def-package! typescript-mode
   :mode "\\.ts$"
   :config
   (add-hook 'typescript-mode-hook #'rainbow-delimiters-mode)
+  ;; TODO: make this take prettier-js option into consideration
+  (add-hook 'typescript-mode-hook #'prettier-js-mode)
 
   (set! :electric 'typescript-mode :chars '(?\} ?\)) :words '("||" "&&"))
 
@@ -37,10 +34,10 @@
 
     (map! :map typescript-mode-map
         :localleader
-        "r" #'tide-refactor
-        "R" #'tide-restart-server
-        "=" #'tide-format
-        "f" #'tide-fix)
+        :n "r" #'tide-refactor
+        :n "R" #'tide-restart-server
+        :n "=" #'tide-format
+        :n "f" #'tide-fix)
 
   (setq tide-format-options
         '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions t

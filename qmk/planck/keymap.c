@@ -10,12 +10,31 @@
   #include "backlight.h"
 #endif
 
+// Makes tap and hold keys work better for fast typers who don't want tapping term set above 500
+#define PERMISSIVE_HOLD
+
+#define TAB_LWR LT(LOWER, KC_TAB)
+#define GUI_SPC MT(MOD_RGUI, KC_SPC)
+#define SFT_ENT MT(MOD_LSFT, KC_ENT)
+#define FN_ENT  LT(RAISE, KC_ENT)
+#define FN_ESC  LT(NAV, KC_ESC)
+#define FN_QUOT LT(NAV, KC_QUOT)
+
+#define TGL_KB  LSFT(LGUI(KC_SPC))
+
+#define BASE 0
+#define SWE 1
+#define LOWER 2
+#define RAISE 3
+#define NAV 4
+#define FUN 5
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-#define _QW 0
-#define _SV 1
+#define BASE 0
+#define SWE 1
 #define _LW 2
 #define _RS 3
 #define _FN 4
@@ -37,11 +56,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl | Alt  | GUI  |LRaise|LLower|    Space    |LRaise|LLower| LAlt | LSwe | Ctrl |
  * `-----------------------------------------------------------------------------------'
 */
-[_QW] = {
+[BASE] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_FN, KC_QUOT)},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCTL, KC_LGUI, KC_LALT, MO(_RS), MO(_LW), KC_SPC,  KC_SPC,  MO(_RS), MO(_LW), KC_RALT, TG(_SV), KC_RCTL}
+  {FN_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(_FN, KC_QUOT)},
+  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT},
+  {KC_LCTL, KC_LGUI, KC_LALT, MO(_RS), MO(_LW), KC_SPC,  KC_SPC,  MO(_RS), MO(_LW), KC_RALT, TG(SWE), KC_RCTL}
 },
 /* Swedish
  * ,-----------------------------------------------------------------------------------.
@@ -49,15 +68,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |  Ö   |  Ä   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |  -   |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      | Bksp |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
 */
-[_SV] = {
+[SWE] = {
   {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, NO_AA},
   {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, NO_OSLH, NO_AE},
-  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MINS, KC_TRNS},
+  {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
   {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_BSPC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS}
 },
 /* Raise (right hand): symbols

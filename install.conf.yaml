@@ -12,9 +12,10 @@
     ~/.config/git/ignore: git/.gitignore_global
     ~/.config/nvim/init.vim: vim/.vimrc
     ~/.emacs.d/init.el: emacs/doom/init.el
-    ~/.emacs.d/modules/private/mbark: emacs/doom/modules/private/mbark
-    ~/.emacs.d/modules/private/typescript: emacs/doom/modules/private/typescript
-    ~/.emacs.d/modules/private/go: emacs/doom/modules/private/go
+    ~/.doom.d/init.el: emacs/doom/init.doom.el
+    ~/.doom.d/modules/config/mbark: emacs/doom/modules/config/mbark
+    ~/.doom.d/modules/lang/typescript: emacs/doom/modules/lang/typescript
+    ~/.doom.d/modules/lang/go: emacs/doom/modules/lang/go
     # ~/.config/compton/config: config/compton/config
     # ~/.config/i3/config: config/i3/config
     # ~/.config/polybar/config: config/polybar/config

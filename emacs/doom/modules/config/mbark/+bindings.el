@@ -7,9 +7,13 @@
      :desc "Flycheck error"       :nv "!" #'flycheck-previous-error)
 
    (:desc "next..." :prefix "]"
-     :desc "Flycheck error"       :nv "!" #'flycheck-previous-error)
+     :desc "Flycheck error"       :nv "!" #'flycheck-next-error)
+
+   (:desc "search" :prefix "/"
+     :desc "Resume last"          :n "r" #'ivy-resume)
 
    (:desc "project" :prefix "p"
+     :desc "Switch project"          :n "p" #'counsel-projectile-switch-project
      :desc "Find file in project"    :n "f" #'projectile-find-file
      :desc "Search project"          :n "s" #'counsel-projectile-rg)
 
