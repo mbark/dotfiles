@@ -11,11 +11,7 @@
     ~/.gitconfig: git/.gitconfig
     ~/.config/git/ignore: git/.gitignore_global
     ~/.config/nvim/init.vim: vim/.vimrc
-    ~/.emacs.d/init.el: emacs/doom/init.el
-    ~/.doom.d/init.el: emacs/doom/init.doom.el
-    ~/.doom.d/modules/config/mbark: emacs/doom/modules/config/mbark
-    ~/.doom.d/modules/lang/typescript: emacs/doom/modules/lang/typescript
-    ~/.doom.d/modules/lang/go: emacs/doom/modules/lang/go
+    ~/.emacs.d/.config/doom: emacs/doom
     # ~/.config/compton/config: config/compton/config
     # ~/.config/i3/config: config/i3/config
     # ~/.config/polybar/config: config/polybar/config

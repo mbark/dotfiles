@@ -1,33 +1,4 @@
 ;;; init.el -*- lexical-binding: t; -*-
-;;
-;; Author:  Henrik Lissner <henrik@lissner.net>
-;; URL:     https://github.com/hlissner/.emacs.d
-;;
-;;   =================     ===============     ===============   ========  ========
-;;   \\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
-;;   ||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
-;;   || . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
-;;   ||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
-;;   || . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
-;;   ||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
-;;   || . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
-;;   ||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
-;;   ||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
-;;   ||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
-;;   ||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
-;;   ||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
-;;   ||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
-;;   ||   .=='    _-'          '-__\._-'         '-_./__-'         `' |. /|  |   ||
-;;   ||.=='    _-'                                                     `' |  /==.||
-;;   =='    _-'                                                            \/   `==
-;;   \   _-'                                                                `-_   /
-;;    `''                                                                      ``'
-;;
-;; These demons are not part of GNU Emacs.
-;;
-;;; License: MIT
-
-(require 'core (concat user-emacs-directory "core/core"))
 
 (doom! :feature
        (popup            ; tame sudden yet inevitable temporary windows
@@ -132,7 +103,7 @@
        :app
       ;(email +gmail)    ; emacs as an email client
       ;irc               ; how neckbeards socialize
-      ;rss               ; emacs as an RSS reader
+      ;(rss +org)        ; emacs as an RSS reader
       ;twitter           ; twitter client https://twitter.com/vnought
       ;(write            ; emacs as a word processor (latex + org + markdown)
       ; +wordnut         ; wordnet (wn) search
@@ -143,10 +114,17 @@
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
-       (default +bindings +snippets +evil-commands)
+       (default +bindings +snippets +evil-commands))
 
-       ;; This allows you to store your private module at $XDG_CONFIG_HOME/doom.
-       ;; Without +xdg it uses ~/.doom.d/. If your config directory doesn't
-       ;; exist, this module does nothing.
-       (private)
-       (mbark +bindings))
+
+;; Prefer dracula over other themes
+(setq doom-theme 'doom-dracula)
+
+(setq doom-font (font-spec :family "Fira Code" :size 12)
+      doom-variable-pitch-font (font-spec :family "Fira Code")
+      doom-unicode-font (font-spec :family "Fira Code")
+      doom-big-font (font-spec :family "Fira Code" :size 19))
+
+;; redefine avy but with another command appended (goto-word)
+(def-package! avy
+  :commands (avy-goto-char-2 avy-goto-line avy-goto-word-1))

@@ -1,5 +1,7 @@
 ;;; lang/typescript/config.el -*- lexical-binding: t; -*-
 
+(message "loaded private typescript module")
+
 (def-package! prettier-js)
 
 (def-package! typescript-mode
