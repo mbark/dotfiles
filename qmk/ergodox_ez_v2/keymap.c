@@ -4,41 +4,21 @@
 #include "action_layer.h"
 #include "version.h"
 
+// Makes tap and hold keys work better for fast typers who don't want tapping term set above 500
+#define PERMISSIVE_HOLD
+
 // Make it easier to read the layouts
 #define _______ KC_TRNS
 
 // Combokeys
-#define ESC_CTL MT(MOD_LCTL, KC_ESC)
+#define ESC_CTL MT(MOD_CTRL, KC_ESC)
 #define RAISE OSL(_RAISE)
 #define LOWER OSL(_LOWER)
 
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
-#define _SUPERDUPER 3
-
-// Combo : SuperDuper layer from S+D (R+S in Colemak)
-#define SUPERDUPER_COMBO_COUNT 1
-#define EECONFIG_SUPERDUPER_INDEX (uint8_t *) 19
-
-enum process_combo_event {
-  CB_SUPERDUPER,
-};
-
-const uint16_t PROGMEM superduper_combos[SUPERDUPER_COMBO_COUNT][3] = {
-  [_QWERTY] = {KC_S, KC_D, COMBO_END},
-};
-
-combo_t key_combos[COMBO_COUNT] = {
-  [CB_SUPERDUPER] = COMBO_ACTION(superduper_combos[_QWERTY]),
-};
-
-
-const uint16_t empty_combo[] = {COMBO_END};
-
-void set_superduper_key_combos(void);
-void clear_superduper_key_combos(void);
-
+#define _SUPDUP 3
 
 // TODO: write the actual keycodes
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,17 +49,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______,
         ESC_CTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
         KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______,
-        RAISE,   KC_LCTL, KC_LALT, KC_LGUI, LOWER,
+        RAISE,   KC_LCTL, KC_LALT, KC_LGUI, LOWER,  
 
                                                                      _______, _______,
                                                                               _______,
-                                                          KC_ENT,    KC_BSPC, _______,
+                                                          KC_ENT,    KC_BKSP, _______,
 
         // right hand
         _______,   _______, _______, _______, _______, _______,  _______,
         _______,   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_LBRC,
-                   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
-        _______,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSPC,
+                   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  FN_QUOT,
+        _______,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_LSPC,
         RAISE,     KC_RGUI, KC_RALT, KC_RCTL, LOWER,
 
         _______, _______,
@@ -119,10 +99,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                               _______,
                                                             _______, _______, _______,
        // right hand
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-                KC_RPRN, KC_RBRC, KC_EQL,  KC_BSLS, KC_RALT, _______,
-       _______, _______, KC_RCBR, KC_PLUS, KC_PIPE, KC_RCTL, _______,
+       _______, _______, _______, _______, _______, _______, ______,
+       _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, ______,
+                KC_RPRN, KC_RBRC, KC_EQL,  KC_BSLS, KC_RALT, ______,
+       _______, _______, KC_RCBR, KC_PLUS, KC_PIPE, KC_RCTL, ______,
                 _______, _______, _______, _______, _______,
 
        _______, _______,
@@ -194,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-[_SUPERDUPER] = LAYOUT_ergodox(
+[_SUPDUP] = LAYOUT_ergodox(
     // left hand
     _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______,
@@ -204,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                                        _______, _______,
                                                                 _______,
-                                              KC_LSFT, _______, _______,
+                                              KC_SHFT, _______, _______,
     // right hand
     _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, KC_PGUP, KC_MNXT, KC_VOLU, _______,
@@ -232,18 +212,23 @@ void matrix_scan_user(void) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
     switch (layer) {
-        case _LOWER:
+        case SWE:
+            // Binary 1 represented by the leds
+            // --*
+            ergodox_right_led_3_on();
+            break;
+        case LOWER:
             // Binary 2 represented by the leds
             // -*-
             ergodox_right_led_2_on();
             break;
-        case _RAISE:
+        case RAISE:
             // Binary 3 represented by the leds
             // -**
             ergodox_right_led_3_on();
             ergodox_right_led_2_on();
             break;
-        case _SUPERDUPER:
+        case NAV:
             // Binary 4 represented by the leds
             // *--
             ergodox_right_led_1_on();
@@ -276,29 +261,3 @@ void matrix_scan_user(void) {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-void set_superduper_key_combos(void) {
-  uint8_t layer = eeprom_read_byte(EECONFIG_SUPERDUPER_INDEX);
-
-  switch (layer) {
-    case _QWERTY:
-      key_combos[CB_SUPERDUPER].keys = superduper_combos[layer];
-      break;
-  }
-}
-
-void clear_superduper_key_combos(void) {
-  key_combos[CB_SUPERDUPER].keys = empty_combo;
-}
-
-void process_combo_event(uint8_t combo_index, bool pressed) {
-  if (pressed) {
-    switch(combo_index) {
-      case CB_SUPERDUPER:
-        layer_on(_SUPERDUPER);
-        break;
-    }
-  } else {
-    layer_off(_SUPERDUPER);
-    unregister_mods(MOD_BIT(KC_LGUI) | MOD_BIT(KC_LCTL) | MOD_BIT(KC_LALT)); // Sometimes mods are held, unregister them
-  }
-}

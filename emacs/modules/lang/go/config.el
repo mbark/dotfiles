@@ -62,10 +62,10 @@
 
   (map! :map go-mode-map
         :localleader
-        "r" #'+go/refactor-menu
-        "b" #'+go/build-menu
-        "h" #'+go/help-menu
-        "t" #'+go/test-menu
+        :n "r" #'+go/refactor-menu
+        :n "b" #'+go/build-menu
+        :n "h" #'+go/help-menu
+        :n "t" #'+go/test-menu
         :n "gr" #'go-play-buffer
         :v "gr" #'go-play-region))
 

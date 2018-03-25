@@ -17,4 +17,4 @@
 (setq frame-resize-pixelwise t)
 
 ;; transparent background
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 50))
