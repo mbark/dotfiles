@@ -40,7 +40,6 @@ void set_superduper_key_combos(void);
 void clear_superduper_key_combos(void);
 
 
-// TODO: write the actual keycodes
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *

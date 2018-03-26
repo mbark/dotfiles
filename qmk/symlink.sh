@@ -16,6 +16,9 @@ create_symlinks() {
     echo "--> Symlinking $1"
     ln -sf "$FROM/keymap.c" "$TO/keymap.c"
     ln -sf "$FROM/rules.mk" "$TO/rules.mk"
+    if [ -f "$FROM/config.h"  ] ; then
+        ln -sf "$FROM/config.h" "$TO/config.h"
+    fi
 }
 
 create_symlinks ergodox_ez
