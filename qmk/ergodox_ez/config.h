@@ -3,7 +3,7 @@
 
 #include "../../config.h"
 
-#define TAPPING_TERM 200
+/* #define TAPPING_TERM 50 */
 
 #define COMBO_TERM 20
 #define COMBO_COUNT 1
