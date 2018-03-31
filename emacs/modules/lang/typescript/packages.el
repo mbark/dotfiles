@@ -3,6 +3,5 @@
 
 (package! tide)
 (package! typescript-mode)
-(package! add-node-modules-path)
 (package! prettier-js)
 
