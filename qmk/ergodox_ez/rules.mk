@@ -24,6 +24,7 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 COMBO_ENABLE = yes
 TAP_DANCE_ENABLE = yes
+UNICODE_ENABLE=yes
 
 ifndef QUANTUM_DIR
 	include ../../../../Makefile
