@@ -37,13 +37,13 @@
       ("organize imports"           :exec tide-organize-imports)
       ("restart tide server"        :exec tide-restart-server)))
 
-  (map! :map tide-mode-map
+  (map! :map typescript-mode-map
         :localleader
         :n "=" #'tide-format
         :n "R" #'tide-restart-server
         :n "t" #'tide-jsdoc-template
         (:prefix "r"
-          :n "." #'+typescript/refactor-menu
+          :n "m" #'+typescript/refactor-menu
           :n "r" #'tide-refactor
           :n "f" #'tide-fix
           :n "o" #'tide-organize-imports

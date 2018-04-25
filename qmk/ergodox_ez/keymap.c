@@ -11,7 +11,7 @@
 #define ESC_ALT MT(MOD_LALT, KC_ESC)
 #define QOT_ALT MT(MOD_RALT, KC_QUOT)
 #define Z_CTRL MT(MOD_LCTL, KC_Z)
-#define SLS_CTL MT(MOD_LCTL, KC_Z)
+#define SLS_CTL MT(MOD_LCTL, KC_SLSH)
 
 #define LOW_ENT LT(_LOWER, KC_ENT)
 #define RIS_SPC LT(_RAISE, KC_SPC)
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | AltGui |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  | AltGui |
+ * | AltGui |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   [    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |Esc Alt |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  | ' Alt  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         // right hand
         _______,   _______, _______, _______, _______, _______,  _______,
-        _______,   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     RAL_GUI,
+        _______,   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_LBRC,
                    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  QOT_ALT,
         _______,   KC_N,    KC_M,    KC_COMM, KC_DOT,  SLS_CTL,  KC_RSFT,
         KC_RGUI,   _______, _______, _______, RCT_ALT,
@@ -192,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, _______, _______, _______, _______, _______, _______,
        _______, KC_MINS, KC_7,    KC_8,    KC_9,    _______, _______,
                 KC_EQL,  KC_4,    KC_5,    KC_6,    _______, _______,
-       _______, KC_SLSH, KC_1,    KC_2,    KC_3,    _______, _______,
+       _______, KC_BSLS, KC_1,    KC_2,    KC_3,    _______, _______,
                          _______, _______, _______, _______, _______,
 
        _______, _______,
@@ -278,7 +278,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // right hand
     _______, _______, _______, _______, _______, _______, _______,
     _______, CTL_BKW, KC_PGDN, KC_PGUP, CTL_FRW, _______, KC_MUTE,
-             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, GUI_FRW, KC_MNXT,
+             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, GUI_FRW, KC_MPLY,
     _______, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, GUI_BKW, _______,
                       KC_BTN1, _______, _______, _______, _______,
 
@@ -321,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // right hand
     _______, _______, _______, _______, _______, _______, _______,
     _______, _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-    _______, _______, KC_F4,   KC_F5,   KC_F6,   KC_F11, 
+             _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______, 
     _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______,
     _______, _______, _______, _______, _______,
 
@@ -439,7 +439,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
 // ==================== other stuff ====================
 // Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {};
+void matrix_init_user(void) {
+    set_unicode_input_mode(UC_LNX);
+};
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
@@ -450,6 +452,11 @@ void matrix_scan_user(void) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
     switch (layer) {
+        case 1:
+            // Binary 1 represented by the leds
+            // -*-
+            ergodox_right_led_1_on();
+            break;
         case 2:
             // Binary 2 represented by the leds
             // -*-

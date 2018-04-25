@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-alias ls="k --almost-all --human --no-vcs"
-alias ll="k --almost-all --human"
+alias ll="exa -laFh --git --extended"
 
 alias tmux-reattach="tmux new-session -s work -A"
 

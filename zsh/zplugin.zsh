@@ -7,9 +7,6 @@ zplugin light zsh-users/zsh-completions
 zplugin ice pick"contrib/completion/zsh"; zplugin light docker/cli
 zplugin ice pick"contrib/completion/zsh"; zplugin light docker/compose
 
-zplugin light supercrabtree/k
-zplugin light lukechilds/zsh-nvm
-
 zplugin light chrissicool/zsh-256color
 zplugin light djui/alias-tips
 zplugin light zlsun/solarized-man
@@ -24,6 +21,9 @@ zplugin snippet "$HOME/dotfiles/zsh/modules/alias.zsh"
 zplugin snippet "$HOME/dotfiles/zsh/modules/completions.zsh"
 zplugin snippet "$HOME/dotfiles/zsh/modules/fuzzy.zsh"
 zplugin snippet "$HOME/dotfiles/zsh/modules/history.zsh"
+
+zplugin ice wait'1' atload'_zsh_nvm_lazy_load'
+zplugin light lukechilds/zsh-nvm
 
 zplugin ice wait'1' atload'_zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
