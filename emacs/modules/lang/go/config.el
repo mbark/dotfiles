@@ -94,7 +94,7 @@
   :commands (godoctor-rename godoctor-extract godoctor-toggle godoctor-godoc)
   :config
   (unless (executable-find "godoctor")
-    (wanr "go-mode: couldn't find godoctor, refactoring commands won't work")))
+    (warn "go-mode: couldn't find godoctor, refactoring commands won't work")))
 
 (def-package! company-go
   :init (setq command-go-gocode-command "gocode")
