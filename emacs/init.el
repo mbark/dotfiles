@@ -12,7 +12,6 @@
        spellcheck        ; tasing you for misspelling mispelling
        (syntax-checker   ; tasing you for every semicolon you forget
         +childframe)     ; use childframes for error popups (Emacs 26+ only)
-       version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
@@ -23,8 +22,8 @@
       ; +fuzzy)          ; enable fuzzy search backend for helm
       ;ido               ; the other *other* search engine...
        (ivy              ; a search engine for love and life
-        +childframe
-        +fuzzy)          ; enable fuzzy search backend for ivy
+        +childframe)
+        ;; +fuzzy)          ; enable fuzzy search backend for ivy
 
        :ui
        doom              ; what makes DOOM look the way it does
@@ -43,11 +42,13 @@
       ;pretty-code       ; replace bits of code with pretty symbols
       ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
       ;unicode           ; extended unicode support for various languages
+      vc-gutter
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
 
        :editor
        parinfer          ; turn lisp into python, sort of
+       rotate-text
 
        :emacs
        dired             ; making dired pretty [functional]
@@ -56,6 +57,7 @@
       ;eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
+       vc
 
        :tools
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -68,7 +70,6 @@
       ;pdf               ; pdf enhancements
       ;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
-       rotate-text       ; cycle region at point between text candidates
        tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
       ;wakatime
