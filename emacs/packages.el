@@ -2,3 +2,4 @@
 ;;; packages.el
 
 (package! prettier-js)
+(package! helm-rg)

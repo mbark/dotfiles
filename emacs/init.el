@@ -18,21 +18,23 @@
        (company          ; the ultimate code completion backend
         +childframe
         +auto)           ; as-you-type code completion
-      ;(helm             ; the *other* search engine for love and life
-      ; +fuzzy)          ; enable fuzzy search backend for helm
-      ;ido               ; the other *other* search engine...
-       (ivy              ; a search engine for love and life
+      (helm             ; the *other* search engine for love and life
         +childframe)
+       ;+fuzzy)          ; enable fuzzy search backend for helm
+      ;ido               ; the other *other* search engine...
+       ;(ivy              ; a search engine for love and life
+       ; +childframe)
         ;; +fuzzy)          ; enable fuzzy search backend for ivy
 
        :ui
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-modeline     ; a snazzy Atom-inspired mode-line
+       ;doom-modeline     ; a snazzy Atom-inspired mode-line
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        evil-goggles      ; display visual hints when editing in evil
        fci               ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
+       modeline
        nav-flash         ; blink the current line after jumping
       ;neotree           ; a project drawer, like NERDTree for vim
        treemacs          ; a project drawer, like neotree but cooler
@@ -46,18 +48,20 @@
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
 
-       :editor
-       parinfer          ; turn lisp into python, sort of
-       rotate-text
-
        :emacs
        dired             ; making dired pretty [functional]
        ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
       ;eshell            ; a consistent, cross-platform shell (WIP)
+      hideshow
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
        vc
+
+       :editor
+       multiple-cursors
+       parinfer          ; turn lisp into python, sort of
+       rotate-text
 
        :tools
        editorconfig      ; let someone else argue about tabs vs spaces
