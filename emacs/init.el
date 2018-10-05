@@ -59,11 +59,13 @@
        vc
 
        :editor
+       format
        multiple-cursors
        parinfer          ; turn lisp into python, sort of
        rotate-text
 
        :tools
+       docker
        editorconfig      ; let someone else argue about tabs vs spaces
       ;ein               ; tame Jupyter notebooks with emacs
        gist              ; interacting with github gists

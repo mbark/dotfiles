@@ -22,7 +22,7 @@ if [ -f "/usr/libexec/java_home" ] ; then
 fi
 
 if [[ $(uname) == "Darwin" ]] ; then
-    FZF_PATH="/usr/local/opt/fzf/"
+    FZF_PATH="/usr/local/opt/fzf"
     export ZPLUG_HOME="/usr/local/opt/zplug"
 else
     FZF_PATH="/usr/share/fzf"

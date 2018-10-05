@@ -19,9 +19,6 @@
 ;; transparent background
 (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
 
-(def-package! prettier-js)
-(add-hook 'tide-mode-hook #'prettier-js-mode)
-
 ;; Prefer dracula over other themes
 (setq doom-theme 'doom-challenger-deep)
 
@@ -32,4 +29,4 @@
 
 ;; redefine avy but with another command appended (goto-word)
 (def-package! avy
-  :commands (avy-goto-char-2 avy-goto-line avy-goto-word-1))
+  :commands (avy-goto-char-2 avy-goto-word-1))
