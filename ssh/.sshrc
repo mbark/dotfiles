@@ -1,5 +1,0 @@
-# Use vi-mode
-bindkey -v
-export KEYTIMEOUT=20
-
-bindkey -M viins 'kj' vi-cmd-mode
