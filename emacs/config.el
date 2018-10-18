@@ -17,7 +17,7 @@
 (setq frame-resize-pixelwise t)
 
 ;; transparent background
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+;; (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
 
 ;; Prefer dracula over other themes
 (setq doom-theme 'doom-challenger-deep)

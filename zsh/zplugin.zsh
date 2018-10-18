@@ -4,8 +4,8 @@ zplugin snippet OMZ::plugins/vi-mode/vi-mode.plugin.zsh
 
 zplugin light zsh-users/zsh-completions
 
-zplugin ice pick"contrib/completion/zsh"; zplugin light docker/cli
-zplugin ice pick"contrib/completion/zsh"; zplugin light docker/compose
+zplugin ice as"completion"; zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
 
 zplugin light chrissicool/zsh-256color
 zplugin light djui/alias-tips
