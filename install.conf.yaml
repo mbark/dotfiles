@@ -18,6 +18,8 @@
     # ~/.xinitrc: .xinitrc
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - [ git submodule update --init --recursive, Installing submodules ]
   - ["curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein-installer.sh && bash /tmp/dein-installer.sh ~/.vim", Installing dein for neovim]
-  - [~/dotfiles/qmk/symlink.sh]
+  - [ "command -v brew >/dev/null || /usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"", Installing Homebrew (if necessary) ]
+  - [ brew bundle --global]
+  - [ ~/dotfiles/qmk/symlink.sh ]
