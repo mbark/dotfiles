@@ -23,12 +23,9 @@ brew "isync"
 brew "jq"
 brew "libmagic"
 brew "mu", args: ["with-emacs"]
-brew "mysql@5.6"
 brew "neovim"
 brew "nginx", restart_service: true
 brew "node"
-brew "python@2"
-brew "offlineimap"
 brew "pv"
 brew "reattach-to-user-namespace"
 brew "ripgrep"
