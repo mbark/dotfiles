@@ -18,5 +18,5 @@ alias vim="nvim"
 alias tmux-reattach="tmux new-session -s work -A"
 
 # dotfile management
-alias dots="/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME"
-complete --command dots --wraps bar
+alias dots="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+complete --command dots --wraps git
