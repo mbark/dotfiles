@@ -1,25 +1,12 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
+
 (load! "+bindings")
-
-;;
-;; Plugins
-;;
-
-;;
-;; Config
-;;
 
 (after! evil-escape
   (setq evil-escape-key-sequence "kj"))
 
-;; fix to make chunkwm tile properly
-(setq frame-resize-pixelwise t)
-
-;; transparent background
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-
-;; Prefer dracula over other themes
+;; Use challenger-deep theme
 (setq doom-theme 'doom-challenger-deep)
 
 (setq doom-font (font-spec :family "Fira Code" :size 12)
@@ -27,6 +14,16 @@
       doom-unicode-font (font-spec :family "Fira Code")
       doom-big-font (font-spec :family "Fira Code" :size 19))
 
-;; redefine avy but with another command appended (goto-word)
-(def-package! avy
-  :commands (avy-goto-char-2 avy-goto-word-1))
+;; Protobuf mode
+(use-package! protobuf-mode
+  :mode "\\.proto\\'")
+
+(use-package! graphql-mode
+  :mode "\\.gql\\'")
+
+(after! company
+  (setq company-idle-delay 0.15))
+
+(after! lsp-mode
+  (lsp-register-custom-settings
+   '(("gopls.experimentalWorkspaceModule" t t))))

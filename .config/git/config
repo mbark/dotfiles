@@ -1,11 +1,17 @@
 [user]
-	email = martin.barksten@gmail.com
-	name = Martin Barksten
+	email = github@wohlf.art
+	name = Martin Wohlfart
 [core]
 	autocrlf = input
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --dark
+[interactive]
+	diffFilter = delta --color-only
 [push]
 	default = simple
 [alias]
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	delete-merged-branches = "!git branch -r --merged | grep -v '^* master$' | grep -v '^  master$' | sed 's/origin\\///' | xargs -n 1 git push --no-verify --delete origin"
+[github]
+	user = mbark
+[pull]
+	ff = only

@@ -13,7 +13,6 @@ set showmode
 set surround
 
 inoremap kj <Esc>
-vnoremap kj <Esc>
 
 " Refresh configuration
 nnoremap <leader>hR :source ~/.ideavimrc<cr>
@@ -84,3 +83,17 @@ nnoremap <leader>tb :action Annotate<cr>
 " Errors
 nnoremap <leader>en :action GotoNextError<cr>
 nnoremap <leader>ep :action GotoPreviousError<cr>
+
+" Multi cursors
+set multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+nmap <C-x> <Plug>SkipOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+nmap <C-p> <Plug>RemoveOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+nmap <C-S-p> EditorCloneCaretAbove
+nmap <C-S-n> EditorCloneCaretBelow
