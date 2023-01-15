@@ -15,3 +15,5 @@
 	user = mbark
 [pull]
 	ff = only
+[merge]
+	conflictStyle = diff3

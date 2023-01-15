@@ -1,11 +1,3 @@
-function private_key_bindings
-    fish_vi_key_bindings
-    bind -M insert -m default kj force-repaint
-    bind -M insert \ck up-or-search
-    bind -M insert \cj down-or-search
-    fish_default_key_bindings -M insert
-end
-
 set -g fish_key_bindings private_key_bindings
 
 # fisher
@@ -29,8 +21,12 @@ function gup
     if [ -n "$root" ];
         cd "$root"
     else
-       echo "not in a git repo" 1>&2
+    echo "not in a git repo" 1>&2
     end
+end
+
+function kill-port
+    kill -9 (lsof -ti:$1)
 end
 
 # dotfile management
@@ -40,3 +36,15 @@ set -g fish_user_paths "$HOME/go/bin" $fish_user_paths
 eval (direnv hook fish)
 source /usr/local/opt/asdf/asdf.fish
 fish_add_path /usr/local/sbin
+
+if test "$TERM_PROGRAM" != "WarpTerminal"
+    function private_key_bindings
+        fish_vi_key_bindings
+        bind -M insert -m default kj force-repaint
+        bind -M insert \ck up-or-search
+        bind -M insert \cj down-or-search
+        fish_default_key_bindings -M insert
+    end
+
+
+end

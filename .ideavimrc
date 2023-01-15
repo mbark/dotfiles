@@ -95,5 +95,5 @@ xmap <C-x> <Plug>SkipOccurrence
 nmap <C-p> <Plug>RemoveOccurrence
 xmap <C-p> <Plug>RemoveOccurrence
 
-nmap <C-S-p> EditorCloneCaretAbove
-nmap <C-S-n> EditorCloneCaretBelow
+nmap <C-S-p> :action EditorCloneCaretAbove<CR>
+nmap <C-S-n> :action EditorCloneCaretBelow<CR>

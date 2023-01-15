@@ -2,4 +2,4 @@
 set -e
 set -o pipefail
 
-qmk compile -kb ergodox_ez -km barkis
+qmk compile -kb lily58 -km barkis -e CONVERT_TO=blok
