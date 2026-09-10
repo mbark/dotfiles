@@ -1,2 +1,9 @@
 dotfiles
+
+# fish rewrites this on every shell interaction - state, not config
 .config/fish/fish_variables
+
+# Work machine config. Stays local; this repo is public.
+.claude/settings.json
+.config/worktrunk/approvals.toml
+.claude/skills/kata-capture/
