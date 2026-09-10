@@ -1,0 +1,13 @@
+onboarding = false
+[keys]
+prefix = "ctrl+space"
+
+[ui]
+agent_panel_sort = "priority"
+
+[[keys.command]]
+key = "prefix+d"
+type = "popup"
+command = "fish -c 'devtab --list'"
+width = "80%"
+height = "70%"

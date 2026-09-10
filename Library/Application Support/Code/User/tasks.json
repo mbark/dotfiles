@@ -1,0 +1,45 @@
+// User-level tasks — available in every workspace.
+// Repo-local tasks still win if a .vscode/tasks.json defines the same label.
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "mise: testboi",
+      "type": "shell",
+      "command": "mise run testboi",
+      "group": { "kind": "test", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": ["$go"]
+    },
+    {
+      "label": "mise: test-backend",
+      "type": "shell",
+      "command": "mise run test-backend",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": ["$go"]
+    },
+    {
+      "label": "mise: build",
+      "type": "shell",
+      "command": "mise run build",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": ["$go"]
+    },
+    {
+      "label": "mise: lint",
+      "type": "shell",
+      "command": "mise run lint",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": ["$go"]
+    },
+    {
+      "label": "mise: generate",
+      "type": "shell",
+      "command": "mise run generate",
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true }
+    }
+  ]
+}

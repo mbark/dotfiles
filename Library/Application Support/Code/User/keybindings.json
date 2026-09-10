@@ -1,0 +1,60 @@
+// GoLand (macOS keymap) muscle memory, ported to VS Code.
+// Later entries win over VS Code defaults. Prefix a command with "-" to unbind.
+[
+  // ---- Navigation history (your #3) --------------------------------
+  { "key": "cmd+[",            "command": "workbench.action.navigateBack" },
+  { "key": "cmd+]",            "command": "workbench.action.navigateForward" },
+  // ...which displaces VS Code's indent/outdent, so give it a new home:
+  { "key": "cmd+alt+[",        "command": "editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly" },
+  { "key": "cmd+alt+]",        "command": "editor.action.indentLines",  "when": "editorTextFocus && !editorReadonly" },
+
+  // ---- Go to ------------------------------------------------------
+  { "key": "cmd+b",            "command": "editor.action.revealDefinition",   "when": "editorHasDefinitionProvider && editorTextFocus" },
+  { "key": "cmd+alt+b",        "command": "editor.action.goToImplementation", "when": "editorHasImplementationProvider && editorTextFocus" },
+  { "key": "cmd+shift+b",      "command": "editor.action.goToTypeDefinition", "when": "editorHasTypeDefinitionProvider && editorTextFocus" },
+  { "key": "alt+f7",           "command": "references-view.findReferences",   "when": "editorHasReferenceProvider" },
+  { "key": "cmd+f12",          "command": "workbench.action.gotoSymbol" },
+  { "key": "cmd+alt+o",        "command": "workbench.action.showAllSymbols" },
+  { "key": "cmd+e",            "command": "workbench.action.showAllEditorsByMostRecentlyUsed" },
+
+  // ---- Edit / refactor --------------------------------------------
+  { "key": "cmd+alt+l",        "command": "editor.action.formatDocument",  "when": "editorTextFocus && !editorReadonly" },
+  { "key": "ctrl+alt+o",       "command": "editor.action.organizeImports", "when": "editorTextFocus && !editorReadonly" },
+  { "key": "shift+f6",         "command": "editor.action.rename",          "when": "editorHasRenameProvider && editorTextFocus" },
+  { "key": "ctrl+t",           "command": "editor.action.refactor",        "when": "editorHasCodeActionsProvider && editorTextFocus" },
+  { "key": "alt+enter",        "command": "editor.action.quickFix",        "when": "editorHasCodeActionsProvider && editorTextFocus" },
+
+  // ---- Errors ------------------------------------------------------
+  { "key": "f2",               "command": "editor.action.marker.next", "when": "editorFocus" },
+  { "key": "shift+f2",         "command": "editor.action.marker.prev", "when": "editorFocus" },
+
+  // ---- Run / debug -------------------------------------------------
+  { "key": "ctrl+shift+r",     "command": "workbench.action.debug.run" },
+  { "key": "ctrl+shift+d",     "command": "workbench.action.debug.start" },
+  { "key": "cmd+f8",           "command": "editor.debug.action.toggleBreakpoint", "when": "editorTextFocus" },
+
+  // ---- Tool windows ------------------------------------------------
+  { "key": "alt+f12",          "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "cmd+shift+f12",    "command": "workbench.action.toggleSidebarVisibility" },
+
+  // ---- Back to the editor (GoLand: Esc from a tool window) ---------
+  // !inputFocus so Esc still clears the explorer filter / cancels a rename,
+  // and terminal is excluded so Esc keeps reaching programs running in it.
+  { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus" },
+  { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && !terminalFocus && !inputFocus" },
+
+  // ---- Diff editor -------------------------------------------------
+  // <C-w><C-w> = vimdiff's "switch window". No VS Code default exists.
+  { "key": "ctrl+w ctrl+w",    "command": "diffEditor.switchSide", "when": "isInDiffEditor" }
+
+  // ---- OPTIONAL: the two genuinely painful GoLand collisions -------
+  // Uncomment either block if the GoLand meaning wins for you.
+  //
+  // cmd+W = "extend selection" in GoLand, but "close editor" in VS Code:
+  // ,{ "key": "cmd+w",        "command": "editor.action.smartSelect.expand", "when": "editorTextFocus" }
+  // ,{ "key": "cmd+shift+w",  "command": "editor.action.smartSelect.shrink", "when": "editorTextFocus" }
+  //
+  // cmd+D = "duplicate line" in GoLand, but "add next occurrence" in VS Code
+  // (you already have <C-n> for add-occurrence via Vim, so this is safe):
+  // ,{ "key": "cmd+d",        "command": "editor.action.copyLinesDownAction", "when": "editorTextFocus && !editorReadonly" }
+]
