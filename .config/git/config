@@ -1,19 +1,82 @@
 [user]
 	email = github@wohlf.art
 	name = Martin Wohlfart
+[github]
+	user = mbark
+
 [core]
 	autocrlf = input
-	pager = delta --dark
+	pager = delta
+	fsmonitor = false
+	untrackedCache = true
+
+# fsmonitor costs a detached daemon with 8 IPC threads per repository, and it
+# only pays for itself on a working tree large enough for `git status` to walk
+# slowly. Enabled globally it also watches every clone a tool manages —
+# lazy.nvim alone held 49 of the 78 daemons running on 2026-09-10.
+[includeIf "gitdir:~/repos/"]
+	path = ~/.config/git/config-worktrees
+
+[column]
+	ui = auto
+
 [interactive]
 	diffFilter = delta --color-only
+
 [push]
-	default = simple
+	default = current
+	ff = only
+	autoSetupRemote = true
+	followTags = true
+
+[pull]
+	rebase = true
+
+[push]
+	prune = true
+	pruneTags = true
+	all = true
+
+[commit]
+        verbose = true
+
+[rerere]
+        enabled = true
+        autoupdate = true
+
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
+[branch]
+        sort = -committerdate
+        autoSetupMerge = simple
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[help]
+        autocorrect = prompt
+
 [alias]
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	delete-merged-branches = "!git branch -r --merged | grep -v '^* master$' | grep -v '^  master$' | sed 's/origin\\///' | xargs -n 1 git push --no-verify --delete origin"
-[github]
-	user = mbark
-[pull]
-	ff = only
-[merge]
-	conflictStyle = diff3
+
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential "https://github.com"]
+	username = mbark

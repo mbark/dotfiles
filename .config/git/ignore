@@ -189,3 +189,4 @@ project/build.properties
 
 ### Meghanada
 .meghanada/
+**/.claude/settings.local.json

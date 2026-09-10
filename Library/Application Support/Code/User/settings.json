@@ -1,49 +1,365 @@
 {
-    "workbench.iconTheme": "vscode-icons",
-    "vim.easymotion": true,
-    "vim.sneak": true,
-    "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
-    "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "k",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
+  // ============================================================
+  //  VSCodeVim — direct translation of ~/.ideavimrc `set` options
+  // ============================================================
+  "vim.leader": "<space>",
+  "vim.timeout": 500,              // set timeoutlen=500
+  "vim.incsearch": true,           // set incsearch
+  "vim.hlsearch": true,            // set hlsearch
+  "vim.ignorecase": true,          // set ignorecase
+  "vim.smartcase": true,           // set smartcase
+  "vim.useSystemClipboard": true,  // set clipboard=unnamed
+  "vim.surround": true,            // set surround
+  "vim.showcmd": true,             // set showmode-ish
+  "vim.useCtrlKeys": true,
+  "vim.foldfix": true,
+  "editor.lineNumbers": "on",      // set number
+  "editor.cursorSurroundingLines": 5, // set scrolloff=5
+
+  // Let these reach VS Code instead of Vim
+  "vim.handleKeys": {
+    "<C-w>": false,
+    "<C-f>": false
+  },
+
+  // inoremap kj <Esc>
+  "vim.insertModeKeyBindings": [
+    { "before": ["k", "j"], "after": ["<Esc>"] }
+  ],
+
+  // ============================================================
+  //  Normal-mode maps.  Non-recursive == nnoremap.
+  //  gcc / gc are BUILT IN to VSCodeVim, so they are not remapped.
+  // ============================================================
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // <leader> opens the which-key menu (see whichkey.bindings below)
+    { "before": ["<space>"], "commands": ["whichkey.show"] },
+
+    // --- Go to ---  (gd is native VSCodeVim -> revealDefinition)
+    { "before": ["g", "a"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["g", "i"], "commands": ["editor.action.goToImplementation"] },
+    { "before": ["g", "s"], "commands": ["editor.action.goToImplementation"] },
+    { "before": ["g", "D"], "commands": ["editor.action.peekDefinition"] },
+    { "before": ["g", "u"], "commands": ["references-view.findReferences"] },
+    { "before": ["g", "r"], "commands": ["go.toggle.test.file"] },
+    { "before": ["g", "t"], "commands": ["editor.action.goToTypeDefinition"] },
+
+    // --- Standard VIM bindings (IDE history, not Vim jumplist) ---
+    { "before": ["<C-o>"], "commands": ["workbench.action.navigateBack"] },
+    { "before": ["<C-i>"], "commands": ["workbench.action.navigateForward"] },
+
+    // --- Diff / PR review: vimdiff-style hunk navigation ---
+    // Acts on the open diff editor (PR review, gitlens compare, multi-diff).
+    // For dirty-diff hunks in a normal editor, use <leader>gn / <leader>gp.
+    { "before": ["]", "c"], "commands": ["workbench.action.compareEditor.nextChange"] },
+    { "before": ["[", "c"], "commands": ["workbench.action.compareEditor.previousChange"] },
+
+    // --- PR review: step between FILES of the active PR (]c/[c steps hunks within one file) ---
+    { "before": ["]", "f"], "commands": ["pr.goToNextDiffInPr"] },
+    { "before": ["[", "f"], "commands": ["pr.goToPreviousDiffInPr"] },
+
+    // --- Refactor quick list ---
+    { "before": ["<C-t>"], "commands": ["editor.action.refactor"] },
+
+    // --- Multiple cursors ---
+    { "before": ["<C-n>"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
+    { "before": ["<C-x>"], "commands": ["editor.action.moveSelectionToNextFindMatch"] },
+    { "before": ["<C-p>"], "commands": ["cursorUndo"] },
+    { "before": ["<C-S-p>"], "commands": ["editor.action.insertCursorAbove"] },
+    { "before": ["<C-S-n>"], "commands": ["editor.action.insertCursorBelow"] }
+  ],
+
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["<space>"], "commands": ["whichkey.show"] },
+    { "before": ["<C-n>"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
+    { "before": ["<C-x>"], "commands": ["editor.action.moveSelectionToNextFindMatch"] }
+  ],
+
+  // ============================================================
+  //  Go / gopls  — 20 modules, gofumpt + golangci-lint already in tree
+  // ============================================================
+  "go.useLanguageServer": true,
+  "go.lintTool": "golangci-lint-v2",
+  "go.lintOnSave": "package",
+  // Formatting is gopls-side only (gopls.formatting.gofumpt below). Do NOT set
+  // go.formatTool/alternateTools.customFormatter: that makes the extension spawn
+  // a gofumpt subprocess per save and bypass gopls' formatter, and the Go
+  // extension warns about the double configuration.
+  // Pin both lint tool ids to the mise-resolving wrapper: this also stops
+  // "Install/Update Tools" from dropping its own build into the Go toolchain
+  // bin dir, where it shadows the mise pin on PATH.
+  "go.alternateTools": {
+    "golangci-lint": "/Users/martinwohlfart/.local/bin/golangci-lint-mise",
+    "golangci-lint-v2": "/Users/martinwohlfart/.local/bin/golangci-lint-mise"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "go.testFlags": ["-v", "-count=1"],
+  "gopls": {
+    "formatting.gofumpt": true,
+    "ui.diagnostic.staticcheck": true,
+    "ui.semanticTokens": true,
+    "ui.completion.usePlaceholders": true,
+    "ui.navigation.importShortcut": "Definition"
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": { "source.organizeImports": "explicit" }
+  },
+
+  // ============================================================
+  //  Memory: 50 repos on a 32GB box. Keep watchers + search lean.
+  // ============================================================
+  "files.watcherExclude": {
+    "**/vendor/**": true,
+    "**/node_modules/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/dist/**": true,
+    "**/.terraform/**": true,
+    "**/.minio/**": true,
+    "**/target/**": true
+  },
+  "search.exclude": {
+    "**/vendor": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.terraform": true,
+    "**/*.pb.go": true,
+    "**/*_gen.go": true
+  },
+  "files.exclude": { "**/.DS_Store": true },
+
+  // ============================================================
+  //  YAML — Helm charts (58) + ArgoCD manifests
+  // ============================================================
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/argoproj/argo-cd/master/assets/swagger.json": [
+      "argocd-apps*/**/*.yaml",
+      "**/argocd/**/*.yaml"
     ],
-    "vim.leader": "<space>",
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "go.formatTool": "goimports",
-    "go.useLanguageServer": true,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "kubernetes": [
+      "**/k8s/**/*.yaml",
+      "**/manifests/**/*.yaml",
+      "**/templates/*.yaml"
+    ]
+  },
+  "redhat.telemetry.enabled": false,
+
+  // ============================================================
+  //  Terraform
+  // ============================================================
+  "[terraform]": { "editor.defaultFormatter": "hashicorp.terraform", "editor.formatOnSave": true },
+  "[terraform-vars]": { "editor.defaultFormatter": "hashicorp.terraform", "editor.formatOnSave": true },
+
+  // ============================================================
+  //  Error Lens — inline diagnostics, closer to your Neovim setup
+  // ============================================================
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "errorLens.excludeBySource": ["cSpell", "Grammarly"],
+  "errorLens.messageMaxChars": 140,
+  "errorLens.followCursor": "allLines",
+
+  // ============================================================
+  //  Editor odds and ends
+  // ============================================================
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "trailing",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "workbench.editor.enablePreview": false,
+  "git.autofetch": true,
+
+  // ============================================================
+  //  which-key menu — mirrors your <leader> tree from .ideavimrc
+  // ============================================================
+  "whichkey.delay": 0,
+  "whichkey.sortOrder": "alphabetically",
+  "whichkey.bindings": [
+    {
+      "key": "f", "name": "File...", "type": "bindings",
+      "bindings": [
+        { "key": ".", "name": "Find in path", "type": "command", "command": "workbench.action.findInFiles" },
+        { "key": "f", "name": "Find file", "type": "command", "command": "workbench.action.quickOpen" },
+        { "key": "r", "name": "Rename file (explorer)", "type": "command", "command": "workbench.files.action.showActiveFileInExplorer" },
+        { "key": "s", "name": "Save", "type": "command", "command": "workbench.action.files.save" }
+      ]
     },
-    "workbench.colorTheme": "Shades of Purple",
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "key": "b", "name": "Buffers...", "type": "bindings",
+      "bindings": [
+        { "key": "b", "name": "Switch buffer", "type": "command", "command": "workbench.action.showAllEditorsByMostRecentlyUsed" },
+        { "key": "x", "name": "Close active tab", "type": "command", "command": "workbench.action.closeActiveEditor" },
+        { "key": "s", "name": "Save all", "type": "command", "command": "workbench.action.files.saveAll" }
+      ]
     },
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "gopls": {
-        "experimentalWorkspaceModule": true,
+    {
+      "key": "c", "name": "Code...", "type": "bindings",
+      "bindings": [
+        { "key": "D", "name": "Show usages (peek)", "type": "command", "command": "editor.action.referenceSearch.trigger" },
+        { "key": "a", "name": "Quick fix / intention", "type": "command", "command": "editor.action.quickFix" },
+        { "key": "f", "name": "Reformat code", "type": "command", "command": "editor.action.formatDocument" },
+        {
+          "key": "r", "name": "+refactor", "type": "bindings",
+          "bindings": [
+            { "key": "i", "name": "Optimize imports", "type": "command", "command": "editor.action.organizeImports" },
+            { "key": "e", "name": "Rename element", "type": "command", "command": "editor.action.rename" },
+            { "key": "r", "name": "Refactor this...", "type": "command", "command": "editor.action.refactor" }
+          ]
+        }
+      ]
     },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "key": "d", "name": "Debug...", "type": "bindings",
+      "bindings": [
+        { "key": "d", "name": "Debug", "type": "command", "command": "workbench.action.debug.start" },
+        { "key": "c", "name": "Choose debug configuration", "type": "command", "command": "workbench.action.debug.selectandstart" },
+        { "key": "b", "name": "Toggle line breakpoint", "type": "command", "command": "editor.debug.action.toggleBreakpoint" },
+        { "key": "r", "name": "View breakpoints", "type": "command", "command": "workbench.debug.action.focusBreakpointsView" }
+      ]
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "key": "r", "name": "Run...", "type": "bindings",
+      "bindings": [
+        { "key": "r", "name": "Run", "type": "command", "command": "workbench.action.debug.run" },
+        { "key": "c", "name": "Choose run configuration", "type": "command", "command": "workbench.action.debug.selectandstart" },
+        { "key": "t", "name": "Test at cursor", "type": "command", "command": "go.test.cursor" },
+        { "key": "f", "name": "Test file", "type": "command", "command": "go.test.file" },
+        { "key": "p", "name": "Test package", "type": "command", "command": "go.test.package" },
+        { "key": "T", "name": "Run task...", "type": "command", "command": "workbench.action.tasks.runTask" },
+        { "key": "b", "name": "Run build task", "type": "command", "command": "workbench.action.tasks.build" },
+        { "key": "a", "name": "Run test task (mise testboi)", "type": "command", "command": "workbench.action.tasks.test" },
+        { "key": "k", "name": "Terminate task", "type": "command", "command": "workbench.action.tasks.terminate" }
+      ]
     },
-    "go.toolsManagement.autoUpdate": true,
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    {
+      "key": "w", "name": "Window...", "type": "bindings",
+      "bindings": [
+        { "key": "h", "name": "Split horizontal", "type": "command", "command": "workbench.action.splitEditorDown" },
+        { "key": "v", "name": "Split vertical", "type": "command", "command": "workbench.action.splitEditor" },
+        { "key": "g", "name": "Move to opposite group", "type": "command", "command": "workbench.action.moveEditorToNextGroup" },
+        {
+          "key": "t", "name": "+tabs", "type": "bindings",
+          "bindings": [
+            { "key": "h", "name": "Previous tab", "type": "command", "command": "workbench.action.previousEditor" },
+            { "key": "l", "name": "Next tab", "type": "command", "command": "workbench.action.nextEditor" }
+          ]
+        }
+      ]
     },
-    "vsicons.dontShowNewVersionMessage": true,
+    {
+      "key": "p", "name": "Project...", "type": "bindings",
+      "bindings": [
+        { "key": "t", "name": "Select in project view", "type": "command", "command": "workbench.files.action.showActiveFileInExplorer" }
+      ]
+    },
+    {
+      "key": "v", "name": "Views...", "type": "bindings",
+      "bindings": [
+        { "key": "v", "name": "Open View... (picker)", "type": "command", "command": "workbench.action.openView" },
+        { "key": "c", "name": "Search & Compare (GitLens)", "type": "command", "command": "gitlens.showSearchAndCompareView" },
+        { "key": "g", "name": "Commit Graph (GitLens)", "type": "command", "command": "gitlens.showGraphView" },
+        { "key": "l", "name": "Launchpad / PRs (GitLens)", "type": "command", "command": "gitlens.showLaunchpadView" },
+        { "key": "w", "name": "Worktrees (GitLens)", "type": "command", "command": "gitlens.showWorktreesView" },
+        { "key": "s", "name": "Source Control", "type": "command", "command": "workbench.view.scm" },
+        { "key": "e", "name": "Explorer", "type": "command", "command": "workbench.view.explorer" },
+        { "key": "p", "name": "Problems", "type": "command", "command": "workbench.actions.view.problems" }
+      ]
+    },
+    {
+      "key": "g", "name": "Git...", "type": "bindings",
+      "bindings": [
+        { "key": "g", "name": "Git Command Palette", "type": "command", "command": "gitlens.gitCommands" },
+        { "key": "a", "name": "Annotate (blame)", "type": "command", "command": "gitlens.toggleFileBlame" },
+        { "key": "c", "name": "Compare with ref... (two-dot, not merge base)", "type": "command", "command": "gitlens.compareWith" },
+        { "key": "h", "name": "File history", "type": "command", "command": "gitlens.showQuickFileHistory" },
+        { "key": "p", "name": "Previous change", "type": "command", "command": "workbench.action.editor.previousChange" },
+        { "key": "n", "name": "Next change", "type": "command", "command": "workbench.action.editor.nextChange" },
+        {
+          // PR review. These need the branch to have an open PR ("review mode"):
+          // the diff is merge-base based, i.e. exactly what GitHub shows.
+          "key": "r", "name": "+Review PR...", "type": "bindings",
+          "bindings": [
+            { "key": "r", "name": "Changes in PR (tree)", "type": "command", "command": "prStatus:github.focus" },
+            { "key": "a", "name": "Open all PR diffs", "type": "command", "command": "pr.openAllDiffs" },
+            { "key": "d", "name": "PR description", "type": "command", "command": "pr.openDescription" },
+            { "key": "o", "name": "Open PR on GitHub", "type": "command", "command": "pr.openPullRequestOnGitHub" },
+            { "key": "c", "name": "Create PR (shows diff vs base)", "type": "command", "command": "pr.create" },
+            { "key": "m", "name": "Mark file viewed", "type": "command", "command": "pr.markFileAsViewed" },
+            { "key": "u", "name": "Mark file NOT viewed", "type": "command", "command": "pr.unmarkFileAsViewed" },
+            { "key": "x", "name": "Reset viewed files", "type": "command", "command": "pr.resetViewedFiles" },
+            { "key": "q", "name": "Close all diff editors", "type": "command", "command": "git.closeAllDiffEditors" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "e", "name": "Errors...", "type": "bindings",
+      "bindings": [
+        { "key": "n", "name": "Next error", "type": "command", "command": "editor.action.marker.next" },
+        { "key": "p", "name": "Previous error", "type": "command", "command": "editor.action.marker.prev" },
+        { "key": "l", "name": "Problems panel", "type": "command", "command": "workbench.actions.view.problems" }
+      ]
+    },
+    {
+      "key": "t", "name": "Toggles...", "type": "bindings",
+      "bindings": [
+        { "key": "b", "name": "Blame annotations", "type": "command", "command": "gitlens.toggleFileBlame" },
+        { "key": "t", "name": "Terminal", "type": "command", "command": "workbench.action.terminal.toggleTerminal" },
+        // Right pane = secondary side bar (GitLens graph, Claude chat). Left = primary side bar.
+        { "key": "r", "name": "Right pane (secondary side bar)", "type": "command", "command": "workbench.action.toggleAuxiliaryBar" },
+        { "key": "l", "name": "Left pane (side bar)", "type": "command", "command": "workbench.action.toggleSidebarVisibility" },
+        { "key": "z", "name": "Zen mode (hide both)", "type": "command", "command": "workbench.action.toggleZenMode" }
+      ]
+    },
+    {
+      "key": "m", "name": "Bookmarks...", "type": "bindings",
+      "bindings": [
+        { "key": "m", "name": "Toggle bookmark", "type": "command", "command": "bookmarks.toggle" },
+        { "key": "l", "name": "List bookmarks", "type": "command", "command": "bookmarks.listFromAllFiles" },
+        { "key": "n", "name": "Next bookmark", "type": "command", "command": "bookmarks.jumpToNext" },
+        { "key": "p", "name": "Previous bookmark", "type": "command", "command": "bookmarks.jumpToPrevious" },
+        { "key": "x", "name": "Clear all bookmarks", "type": "command", "command": "bookmarks.clearFromAllFiles" }
+      ]
+    },
+    {
+      "key": "s", "name": "Search/DB...", "type": "bindings",
+      "bindings": [
+        { "key": "s", "name": "Search in files", "type": "command", "command": "workbench.action.findInFiles" },
+        { "key": "d", "name": "PostgreSQL explorer", "type": "command", "command": "workbench.view.extension.objectExplorer" },
+        { "key": "r", "name": "Send REST request", "type": "command", "command": "rest-client.request" },
+        { "key": "k", "name": "Kubernetes view", "type": "command", "command": "workbench.view.extension.kubernetesView" }
+      ]
+    },
+    {
+      "key": "h", "name": "Help...", "type": "bindings",
+      "bindings": [
+        { "key": "R", "name": "Reload window (re-read config)", "type": "command", "command": "workbench.action.reloadWindow" }
+      ]
+    }
+  ],
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "gitlens.graph.details.location": "auto",
+  "gitlens.views.scm.grouped.views": {
+    "commits": true,
+    "branches": true,
+    "remotes": true,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+    "contributors": true,
+    "fileHistory": false,
+    "repositories": true,
+    "searchAndCompare": true,
+    "launchpad": false
+  },
+  "claudeCode.preferredLocation": "panel"
 }

@@ -1,2 +1,11 @@
 font-family = "Hack"
-theme = "MaterialOcean"
+theme = "Carbonfox"
+
+font-thicken = true
+
+scrollback-limit = 512000000
+
+keybind = global:cmd+apostrophe=toggle_quick_terminal
+quick-terminal-position=center
+quick-terminal-animation-duration=0
+quick-terminal-size=100%
