@@ -16,6 +16,8 @@
   { "key": "cmd+f12",          "command": "workbench.action.gotoSymbol" },
   { "key": "cmd+alt+o",        "command": "workbench.action.showAllSymbols" },
   { "key": "cmd+e",            "command": "workbench.action.showAllEditorsByMostRecentlyUsed" },
+  // GoLand AceJump: types `s`, which Vim maps to EasyMotion n-char search (settings.json)
+  { "key": "ctrl+;",            "command": "vim.remap", "args": { "after": ["s"] }, "when": "editorTextFocus && vim.active && vim.mode == 'Normal'" },
 
   // ---- Edit / refactor --------------------------------------------
   { "key": "cmd+alt+l",        "command": "editor.action.formatDocument",  "when": "editorTextFocus && !editorReadonly" },
@@ -43,9 +45,38 @@
   { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus" },
   { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && !terminalFocus && !inputFocus" },
 
+  // ---- Insert mode: macOS/readline emacs keys ----------------------
+  // vim.useCtrlKeys lets VSCodeVim claim every ctrl key, and in insert mode
+  // it gives them Vim meanings (<C-a> reinsert, <C-e> copy char below, <C-k>
+  // digraph, <C-d> dedent). User bindings beat the extension's, so these win.
+  // <C-f>/<C-b>/<C-h>/<C-u> already behave as expected.
+  //
+  // <C-w> = delete word left, in EVERY vim mode, not just insert. It is
+  // released to VS Code via vim.handleKeys, and macOS VS Code defaults it to
+  // "Switch Window" -- so that default has to be unbound first, otherwise the
+  // window picker pops up everywhere the editor binding does not apply.
+  // Left unbound in the terminal on purpose: there ctrl+w reaches fish, whose
+  // backward-kill-word does the same thing.
+  { "key": "ctrl+w",           "command": "-workbench.action.switchWindow" },
+  { "key": "ctrl+w",           "command": "deleteWordLeft",   "when": "textInputFocus && !editorReadonly" },
+  { "key": "ctrl+a",           "command": "cursorLineStart",  "when": "editorTextFocus && vim.mode == 'Insert'" },
+  { "key": "ctrl+e",           "command": "cursorLineEnd",    "when": "editorTextFocus && vim.mode == 'Insert'" },
+  { "key": "ctrl+k",           "command": "deleteAllRight",   "when": "editorTextFocus && !editorReadonly && vim.mode == 'Insert'" },
+  { "key": "ctrl+d",           "command": "deleteRight",      "when": "editorTextFocus && !editorReadonly && vim.mode == 'Insert'" },
+  // With completions open, VSCodeVim's <C-n>/<C-p> still pick the next/prev one.
+  { "key": "ctrl+n",           "command": "cursorDown",       "when": "editorTextFocus && vim.mode == 'Insert' && !suggestWidgetVisible" },
+  { "key": "ctrl+p",           "command": "cursorUp",         "when": "editorTextFocus && vim.mode == 'Insert' && !suggestWidgetVisible" },
+
   // ---- Diff editor -------------------------------------------------
-  // <C-w><C-w> = vimdiff's "switch window". No VS Code default exists.
-  { "key": "ctrl+w ctrl+w",    "command": "diffEditor.switchSide", "when": "isInDiffEditor" }
+  // vimdiff's "switch window". No VS Code default exists. NOT on the
+  // <C-w><C-w> chord: a chord prefix swallows every plain ctrl+w in a diff
+  // editor, and diff review is where ctrl+w gets typed the most.
+  { "key": "ctrl+shift+w",     "command": "diffEditor.switchSide", "when": "isInDiffEditor" },
+
+  // IdeaVim EditorCloneCaretAbove/Below. Bound here, not in vim.*KeyBindings:
+  // VSCodeVim doesn't register ctrl+shift+n/p, so <C-S-n> remaps never fire.
+  { "key": "ctrl+shift+n",     "command": "editor.action.insertCursorBelow", "when": "editorTextFocus" },
+  { "key": "ctrl+shift+p",     "command": "editor.action.insertCursorAbove", "when": "editorTextFocus" }
 
   // ---- OPTIONAL: the two genuinely painful GoLand collisions -------
   // Uncomment either block if the GoLand meaning wins for you.

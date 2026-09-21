@@ -10,6 +10,7 @@
   "vim.smartcase": true,           // set smartcase
   "vim.useSystemClipboard": true,  // set clipboard=unnamed
   "vim.surround": true,            // set surround
+  "vim.easymotion": true,          // set easymotion (2-char search bound to `s` below)
   "vim.showcmd": true,             // set showmode-ish
   "vim.useCtrlKeys": true,
   "vim.foldfix": true,
@@ -34,6 +35,11 @@
   "vim.normalModeKeyBindingsNonRecursive": [
     // <leader> opens the which-key menu (see whichkey.bindings below)
     { "before": ["<space>"], "commands": ["whichkey.show"] },
+
+    // --- Jump (AceJump / LazyVim flash style) ---
+    // s{2 chars} labels matches, then type the label. Non-recursive, so the
+    // <leader> keys reach EasyMotion instead of the which-key map above.
+    { "before": ["s"], "after": ["<leader>", "<leader>", "2", "s"] },
 
     // --- Go to ---  (gd is native VSCodeVim -> revealDefinition)
     { "before": ["g", "a"], "commands": ["workbench.action.showCommands"] },
@@ -64,15 +70,16 @@
     // --- Multiple cursors ---
     { "before": ["<C-n>"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
     { "before": ["<C-x>"], "commands": ["editor.action.moveSelectionToNextFindMatch"] },
-    { "before": ["<C-p>"], "commands": ["cursorUndo"] },
-    { "before": ["<C-S-p>"], "commands": ["editor.action.insertCursorAbove"] },
-    { "before": ["<C-S-n>"], "commands": ["editor.action.insertCursorBelow"] }
+    { "before": ["<C-p>"], "commands": ["cursorUndo"] }
+    // <C-S-n>/<C-S-p> (cursor below/above) live in keybindings.json
   ],
 
   "vim.visualModeKeyBindingsNonRecursive": [
     { "before": ["<space>"], "commands": ["whichkey.show"] },
     { "before": ["<C-n>"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
-    { "before": ["<C-x>"], "commands": ["editor.action.moveSelectionToNextFindMatch"] }
+    { "before": ["<C-x>"], "commands": ["editor.action.moveSelectionToNextFindMatch"] },
+    // <C-n> leaves you in visual mode, so <C-p> must be bound here too.
+    { "before": ["<C-p>"], "commands": ["cursorUndo"] }
   ],
 
   // ============================================================
@@ -361,5 +368,7 @@
     "searchAndCompare": true,
     "launchpad": false
   },
-  "claudeCode.preferredLocation": "panel"
+  "claudeCode.preferredLocation": "panel",
+  "files.autoSave": "onFocusChange",
+  "claudeCode.hideOnboarding": true
 }
