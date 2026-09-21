@@ -1,7 +1,11 @@
 [tools]
+"aqua:mitsuhiko/insta" = "latest"
 "github:can1357/oh-my-pi" = "latest"
 kind = "latest"
 "npm:@alibaba-group/open-code-review" = "latest"
+rust = "latest"
+"aqua:pre-commit/pre-commit" = "latest"
+"github:nextest-rs/nextest" = "latest"
 
 [env]
 TESTBOI_OFFLOAD_MIN_PACKAGES = "60"
@@ -17,3 +21,6 @@ TESTBOI_CACHE_TARGET = "150G"
 # and then runs, an IDE build, a manual one-off. testboi itself always passes an
 # explicit -p, which wins over this, so its own runs are unaffected.
 GOFLAGS = "-p=4"
+
+[settings]
+idiomatic_version_file_enable_tools = ["rust"]
