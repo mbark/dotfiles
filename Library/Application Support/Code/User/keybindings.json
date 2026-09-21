@@ -45,6 +45,14 @@
   { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus && !inputFocus" },
   { "key": "escape",           "command": "workbench.action.focusActiveEditorGroup", "when": "panelFocus && !terminalFocus && !inputFocus" },
 
+  // ---- <leader> from anywhere --------------------------------------
+  // ctrl+space opens which-key outside the editor too: sidebar, panels,
+  // terminal (needs terminal.integrated.commandsToSkipShell in settings.json).
+  // Insert mode keeps it for suggestions -- the later rule wins there.
+  // macOS "previous input source" is moved to cmd+shift+space to free this.
+  { "key": "ctrl+space",       "command": "whichkey.show",                "when": "!whichkeyActive && !suggestWidgetVisible" },
+  { "key": "ctrl+space",       "command": "editor.action.triggerSuggest", "when": "editorTextFocus && !editorReadonly && vim.mode == 'Insert' && !suggestWidgetVisible" },
+
   // ---- Insert mode: macOS/readline emacs keys ----------------------
   // vim.useCtrlKeys lets VSCodeVim claim every ctrl key, and in insert mode
   // it gives them Vim meanings (<C-a> reinsert, <C-e> copy char below, <C-k>

@@ -370,5 +370,8 @@
   },
   "claudeCode.preferredLocation": "panel",
   "files.autoSave": "onFocusChange",
-  "claudeCode.hideOnboarding": true
+  "claudeCode.hideOnboarding": true,
+  // Let ctrl+space (keybindings.json) open which-key from the terminal too,
+  // instead of the key going to the shell.
+  "terminal.integrated.commandsToSkipShell": ["whichkey.show"]
 }
