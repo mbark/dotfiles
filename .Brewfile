@@ -191,6 +191,8 @@ brew "sox"
 brew "sqlfluff"
 # Modern and pretty fancy file manager for the terminal
 brew "superfile"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale"
 # Tool Command Language
 brew "tcl-tk"
 # Command-line interface for running and interacting with Temporal Server and UI
