@@ -354,6 +354,9 @@
     "**/.forgejo/workflows/*.yaml"
   ],
   "security.workspace.trust.untrustedFiles": "open",
+  // Gutter markers for the checked-out PR's changes vs its base, so <leader>gn
+  // steps through PR hunks (not just uncommitted ones) in a normal editor.
+  "githubPullRequests.quickDiff": true,
   "gitlens.graph.details.location": "auto",
   "gitlens.views.scm.grouped.views": {
     "commits": true,
