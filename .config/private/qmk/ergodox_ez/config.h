@@ -8,7 +8,9 @@
 #define COMBO_TERM 20
 #define COMBO_COUNT 1
 
-#define IGNORE_MOD_TAP_INTERRUPT
+// A single tap of SWE toggles the Swedish layer
+#define TAPPING_TOGGLE 1
+
 #define PERMISSIVE_HOLD
 #define PREVENT_STUCK_MODIFIERS
 
