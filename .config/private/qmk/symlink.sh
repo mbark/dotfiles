@@ -22,6 +22,9 @@ create_symlinks() {
     if [ -f "$FROM/config.h"  ] ; then
         ln -sf "$FROM/config.h" "$TO/config.h"
     fi
+    if [ -f "$FROM/rgb_matrix_user.inc"  ] ; then
+        ln -sf "$FROM/rgb_matrix_user.inc" "$TO/rgb_matrix_user.inc"
+    fi
 }
 
 create_symlinks ergodox_ez
