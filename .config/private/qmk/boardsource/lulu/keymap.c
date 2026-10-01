@@ -6,11 +6,20 @@
 
 enum custom_layers {
   _QWERTY,
+  _SWEDISH,
   _SYMBOL,
   _RAISE,
   _ADJUST,
 };
 
+enum custom_keycodes {
+  SWE_AA = SAFE_RANGE, // å
+  SWE_AE,              // ä
+  SWE_OE,              // ö
+};
+
+// Tap toggles the Swedish layer, hold enables it while held (see TAPPING_TOGGLE)
+#define SWE TT(_SWEDISH)
 #define SYM MO(_SYMBOL)
 #define RAISE MO(_RAISE)
 
@@ -23,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Del  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|  SWE  |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LCTRL| LAlt | LGUI | / SYM   /       \Enter \  |Space |BackSP| RAISE |
@@ -35,8 +44,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
   KC_DEL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, SWE,      KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
                              KC_LCTL, KC_LALT, KC_LGUI, SYM,      KC_ENT,  KC_SPC,  KC_BSPC, RAISE
+),
+/* SWEDISH
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |  å   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |   ö  |  ä   |
+ * |------+------+------+------+------+------|  SWE  |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   |      |      |      | /       /       \      \  |      |      |       |
+ *                   |      |      |      |/       /         \      \ |      |      |       |
+ *                   `----------------------------'           '------''--------------------'
+ */
+
+[_SWEDISH] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, SWE_AA,
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, SWE_OE,  SWE_AE,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                             _______, _______, _______, _______, _______,  _______, _______, _______
 ),
 /* SYMBOL
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -67,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   `  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------.    ,-------|      | Left | Down |  Up  |Right |      |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|  SWE  |    |    ]  |------+------+------+------+------+------|
  * |  F7  |  F8  |  F9  | F10  | F11  | F12  |-------|    |-------|   +  |   -  |   =  |   [  |   ]  |   \  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LCTRL| LAlt | LGUI | / SYM   /       \Enter \  |Space |BackSP| RAISE |
@@ -108,4 +139,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _SYMBOL, _RAISE, _ADJUST);
+}
+
+// ä and ö are typed as Option+U followed by the letter, which assumes the
+// macOS US layout. Option+U is only a dead key without Shift, so the held
+// mods are dropped for it and restored for the letter.
+static void tap_umlaut(uint8_t letter) {
+  const uint8_t mods = get_mods();
+  clear_mods();
+  tap_code16(A(KC_U));
+  set_mods(mods);
+  tap_code(letter);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch (keycode) {
+      case SWE_AA:
+        tap_code16(A(KC_A));
+        return false;
+      case SWE_AE:
+        tap_umlaut(KC_A);
+        return false;
+      case SWE_OE:
+        tap_umlaut(KC_O);
+        return false;
+    }
+  }
+  return true;
 }
