@@ -15,7 +15,6 @@
 // Tap toggles the Swedish layer, hold enables it while held (see TAPPING_TOGGLE)
 #define SWE TT(_SWEDISH)
 #define SYM MO(_SYMBOL)
-#define NUM MO(_NUMPAD)
 #define NAV MO(_NAVIGATION)
 
 // ==================== enums ====================
@@ -24,7 +23,6 @@ enum {
    _QWERTY,
    _SWEDISH,
    _SYMBOL,
-   _NUMPAD,
    _NAVIGATION,
    _FN
 };
@@ -170,50 +168,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______,
        _______, _______, KC_0
 ),
-/* l-num
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |  7   |  8   |  9   |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | sft  | ctrl |  alt |  cmd |      |------|           |------|      |  4   |  5   |  6   |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |  1   |  2   |  3   |      |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |      |
- *                                 |      | l-num|------|       |------|      |  0   |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-[_NUMPAD] = LAYOUT_ergodox(
-       // left hand
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______,
-
-                                                                       _______, _______,
-                                                                                _______,
-                                                             _______,  _______, _______,
-
-       // right hand
-       _______,  _______, _______, _______, _______, _______, _______,
-       _______,  _______, KC_7,    KC_8,    KC_9,    _______, _______,
-                 _______, KC_4,    KC_5,    KC_6,    _______, _______,
-       _______,  _______, KC_1,    KC_2,    KC_3,    _______, _______,
-                          _______, _______, _______, _______, _______,
-
-       _______, _______,
-       _______,
-       _______, _______, KC_0
-),
 /* Navigation
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -340,47 +294,15 @@ void matrix_scan_user(void) {
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
-    switch (layer) {
-        case 1:
-            // Binary 1 represented by the leds
-            // -*-
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            // Binary 2 represented by the leds
-            // -*-
-            ergodox_right_led_2_on();
-            break;
-        case 3:
-            // Binary 3 represented by the leds
-            // **-
-            ergodox_right_led_1_on();
-            ergodox_right_led_2_on();
-            break;
-        case 4:
-            // Binary 4 represented by the leds
-            // --*
-            ergodox_right_led_3_on();
-            break;
-        case 5:
-            // Binary 5 represented by the leds
-            // *-*
-            ergodox_right_led_1_on();
-            ergodox_right_led_3_on();
-        case 6:
-            // Binary 5 represented by the leds
-            // -**
-            ergodox_right_led_2_on();
-            ergodox_right_led_3_on();
-        case 7:
-            // Binary 5 represented by the leds
-            // ***
-            ergodox_right_led_1_on();
-            ergodox_right_led_2_on();
-            ergodox_right_led_3_on();
-        default:
-            // none
-            break;
+    // The layer number in binary, led 1 being the lowest bit
+    if (layer & 1) {
+        ergodox_right_led_1_on();
+    }
+    if (layer & 2) {
+        ergodox_right_led_2_on();
+    }
+    if (layer & 4) {
+        ergodox_right_led_3_on();
     }
 };
 
