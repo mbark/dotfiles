@@ -67,6 +67,14 @@ letters are sent as Option sequences, so they assume the macOS US layout.
 Each half is flashed separately, with USB plugged straight into that half and
 the TRRS cable unplugged.
 
+```sh
+./flash.sh left    # builds barkis, waits for the bootloader drive, copies it on
+./flash.sh right   # the same with barkis_right
+```
+
+Naming the half is what picks the file, so run it for the half that is about
+to be plugged in. By hand, the steps are:
+
 1. Put the half into the bootloader. It mounts as `/Volumes/RPI-RP2`.
    - Hold the top outer key of that half while plugging USB in (Del/fn on the
      left, `-` on the right). This also resets the half's saved settings.
@@ -86,11 +94,11 @@ Which halves need flashing:
   settings stop talking to each other, and the right half's keys go dead.
 
 When flashing from Claude: the Mac cannot tell the halves apart, in the
-bootloader or out of it. A background loop that copies a file as soon as
-`RPI-RP2` mounts is fine for one half. For two halves with different files, have
-the user say which half is in and copy by hand; a loop that takes "second
-mount" to mean "the other half" put the left build on the right half once,
-when the right half re-entered the bootloader with its BOOT toggle still on.
+bootloader or out of it. Run `flash.sh` in the background for one half at a
+time, and start the second run only after the user says the other half is the
+one going in. A loop that took "second mount" to mean "the other half" put the
+left build on the right half once, when the right half re-entered the
+bootloader with its BOOT toggle still on.
 
 ### Hardware faults (both since 2026-10-02)
 
