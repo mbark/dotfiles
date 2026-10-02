@@ -47,4 +47,4 @@ create_symlinks ergodox_ez
 create_symlinks planck
 create_symlinks lily58
 create_symlinks boardsource/lulu
-create_variant_symlinks boardsource/lulu noled
+create_variant_symlinks boardsource/lulu right
