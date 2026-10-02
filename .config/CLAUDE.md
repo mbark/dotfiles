@@ -57,5 +57,9 @@ runtime state stay out.
 - Neovim is LazyVim; plugins pinned in `nvim/lazy-lock.json`.
 - Homebrew packages live in `~/.Brewfile` (`brew bundle dump --global --force`
   to regenerate from what's installed).
-- QMK keymaps in `private/qmk/`.
+- QMK keymaps in `private/qmk/`, linked into `~/repos/qmk_firmware` by
+  `symlink.sh`. `private/qmk/CLAUDE.md` covers building, flashing and
+  debugging the Lulu; read it before touching the keyboard. Two things to know
+  up front: USB goes in the left half, and the right half runs the
+  `barkis_noled` build because its display is broken (since 2026-10-02).
 - VS Code settings are tracked under `~/Library/Application Support/Code/User/`.
