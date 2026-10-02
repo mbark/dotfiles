@@ -15,7 +15,7 @@ Build with:
 
 ```sh
 qmk compile -kb boardsource/lulu/rp2040 -km barkis        # left half
-qmk compile -kb boardsource/lulu/rp2040 -km barkis_noled  # right half, see below
+qmk compile -kb boardsource/lulu/rp2040 -km barkis_right  # right half
 qmk compile -kb ergodox_ez -km barkis
 ```
 
@@ -25,13 +25,16 @@ points at the checkout; if a build can't find the keyboard, check that first.
 ## The Lulu
 
 A split board: two halves joined by a TRRS cable, each with its own RP2040,
-display and LEDs. Both halves run the same keymap.
+display and LEDs.
 
+- **The halves take different firmware**: `barkis` on the left, `barkis_right`
+  on the right. This is a workaround for two hardware faults, see "Hardware
+  faults" below. With the files swapped the halves don't talk, and the right
+  half freezes at start-up.
 - **USB goes in the left half.** The firmware has no handedness setting, so
-  whichever half has USB acts as the left. A right half plugged in alone works,
-  but types the left-hand keys.
+  whichever half has USB acts as the left.
 - **Unplug USB before plugging or unplugging the TRRS cable.** The plug shorts
-  power to the data contacts as it slides, which can kill a half.
+  power to the data contacts as it slides, which can damage a pin.
 - The layers mirror the ErgoDox keymap so that switching boards doesn't move
   any keys. A layer change on one should be made on the other.
 
@@ -55,13 +58,14 @@ letters are sent as Option sequences, so they assume the macOS US layout.
 - Left display: a `SWE` marker while the Swedish layer is on, and the held
   modifiers.
 - Right display: a map of the right-hand keys on the active layer, drawn from
-  the keymap itself. **Not in use at the moment**, see "Right display" below.
+  the keymap itself. **Switched off at the moment**, see "Hardware faults".
 - Keys light on press in a left-to-right rainbow that fades out
   (`rgb_matrix_user.inc`).
 
 ### Flashing
 
-Each half is flashed separately, with USB plugged straight into that half.
+Each half is flashed separately, with USB plugged straight into that half and
+the TRRS cable unplugged.
 
 1. Put the half into the bootloader. It mounts as `/Volumes/RPI-RP2`.
    - Hold the top outer key of that half while plugging USB in (Del/fn on the
@@ -70,36 +74,55 @@ Each half is flashed separately, with USB plugged straight into that half.
      when the firmware doesn't start. Flip it back afterwards, otherwise the
      half returns to the bootloader on every power-up. The small push button
      next to it is RESET only.
-2. Copy the firmware: `/bin/cp -X <file>.uf2 /Volumes/RPI-RP2/`. Plain `cp` on
-   this machine is GNU cp, which has no `-X`.
+2. Copy that half's file: `/bin/cp -X <file>.uf2 /Volumes/RPI-RP2/`. Plain `cp`
+   on this machine is GNU cp, which has no `-X`.
 3. The drive disappears and the half restarts into the new firmware.
 
 Which halves need flashing:
 
 - A change to the keys only: the left half. It decides what every key sends.
-- A change to the right display, the lighting, or any `SPLIT_*` define or
-  feature flag: both halves. Halves built with different split settings stop
-  talking to each other, and the right half's keys go dead.
+- A change to the right display, the lighting, or any `SPLIT_*` or `SERIAL_*`
+  define or feature flag: both halves. Halves built with different link
+  settings stop talking to each other, and the right half's keys go dead.
 
-When flashing from Claude, a background loop that waits for
-`/Volumes/RPI-RP2/INFO_UF2.TXT`, copies the file and reports back saves a
-round trip per half.
+When flashing from Claude: the Mac cannot tell the halves apart, in the
+bootloader or out of it. A background loop that copies a file as soon as
+`RPI-RP2` mounts is fine for one half. For two halves with different files, have
+the user say which half is in and copy by hand; a loop that takes "second
+mount" to mean "the other half" put the left build on the right half once,
+when the right half re-entered the bootloader with its BOOT toggle still on.
 
-### Right display (broken since 2026-10-02)
+### Hardware faults (both since 2026-10-02)
 
-The right half's display, or its connection, failed overnight while the board
-sat plugged in. Any firmware built with the display driver freezes that half
-at start-up; the same keymap without the driver runs fine. A frozen half looks
-dead: no keys over TRRS, and nothing on USB.
+The board sat plugged in overnight and the right side was dead in the morning.
+Two separate faults turned up. What caused them isn't known.
 
-Until the display is reseated or replaced, the right half runs `barkis_noled`:
-the same keymap with `OLED_ENABLE = no`, defined in `boardsource/lulu/noled/`.
-It includes the main `rules.mk` and `config.h`, so the two builds stay
-compatible. The left half keeps the full `barkis` build.
+**The right display freezes the right half.** Any firmware built with the
+display driver freezes that half at start-up; the same keymap without the
+driver runs fine. A frozen half looks dead: no keys over TRRS, and nothing on
+USB. So `barkis_right` is built with `OLED_ENABLE = no`.
 
-To go back: fix the display, flash `barkis` to the right half, and check that
-it comes up on USB by itself before reconnecting TRRS. Then `noled/` and its
-line in `symlink.sh` can go.
+**The left half's receive pin (GP1) is stuck low.** The board's stock link
+uses two wires, one per direction. The wire into the left half's GP1 is held
+low, so the left half could send to the right but never hear it. The other
+wire, joining GP0 on the left half to GP1 on the right, is fine. The link now
+runs over that wire alone in single-wire mode: `config.h` undefines
+`SERIAL_USART_FULL_DUPLEX`, and `right/config.h` moves the right half's end
+to GP1.
+
+Consequences:
+
+- Stock or `default` firmware won't link the halves, since it expects both
+  wires.
+- There is no spare wire. If this one goes, the halves can only be used apart.
+- Single-wire mode leans on the chip's weak internal pull-ups. If right-hand
+  keys start dropping or sticking, try `#define SELECT_SOFT_SERIAL_SPEED 2` (or
+  higher, which is slower) in `config.h`, and flash both halves.
+
+To undo either workaround: for the display, reseat or replace the module
+(0.91" 128x32 SSD1306, I2C), drop `OLED_ENABLE = no` from `right/rules.mk`,
+flash the right half and check that it comes up on USB by itself. For the pin,
+only a repair to the left half would help.
 
 ## Debugging a half that won't come up
 
@@ -121,8 +144,6 @@ What worked on 2026-10-02, in the order that narrows fastest.
 | `cableChangeOccurred: powering on`, then nothing | the half has power but never started USB |
 | `createDevice: failed`, `persistent enumeration failures` | firmware started, then froze |
 
-Both halves report the same IDs, so the log can't say which half is plugged in.
-
 **2. Try the bootloader** with the BOOT toggle. If `RPI-RP2` mounts, the
 processor, USB port and cable are fine, and the problem is in what the firmware
 does at start-up.
@@ -138,13 +159,42 @@ is fine even when no flashed firmware starts.
 `OLED_ENABLE`, `RGB_MATRIX_ENABLE` and `ENCODER_ENABLE` set to `no`, then turn
 them back on one at a time. The Lulu's `lib/oled.c` is compiled even with the
 display driver off, so such a build needs the no-op `oled_write_raw_P` from
-`boardsource/lulu/noled/config.h`.
+`boardsource/lulu/right/config.h`.
 
-Things that were ruled out along the way, and are worth ruling out first next
-time:
+## Debugging a link that won't come up
+
+When each half works alone on USB but the half without USB is dead:
+
+**1. Put the same build on both halves.** If the link is still dead, it isn't a
+settings mismatch.
+
+**2. Measure the wires from the firmware.** Build a throwaway keymap that
+includes `../barkis/keymap.c`, sets `CONSOLE_ENABLE = yes`, and in
+`housekeeping_task_user`, on the half that has USB, once a second:
+
+- reads each link pin ten times with the pull-down on
+  (`gpio_set_pin_input_low`), then with the pull-up on
+  (`gpio_set_pin_input_high`), and
+- prints the counts with `uprintf`.
+
+Read it on the Mac with `qmk console`. Wait a few seconds after start-up before
+the first read, since reading takes the pins away from the link driver. Take
+readings from each half in turn, without the cable and then with it:
+
+| Reading | Meaning |
+|---|---|
+| low with pull-down, high with pull-up | nothing drives the line (normal with no cable) |
+| high with both | the other half is driving or pulling it up (normal with the cable in) |
+| low with both | the line is stuck low: a damaged pin or a short |
+
+On 2026-10-02 the left half's GP1 read low with both pulls and no cable
+attached, and the right half saw the same wire low through the cable.
+
+## Ruled out before, worth ruling out first next time
 
 - macOS "Allow accessories to connect" set to "Ask for New Accessories". The
   approval prompt holds the device longer than the firmware waits for USB
   (2 s), so the half decides it is the secondary one and drops off. It must be
   "Automatically When Unlocked".
 - The BOOT toggle left on, which shows up as `RP2 Boot` in the log.
+- The TRRS cable not pushed fully home.

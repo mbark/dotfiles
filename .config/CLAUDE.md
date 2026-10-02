@@ -60,6 +60,7 @@ runtime state stay out.
 - QMK keymaps in `private/qmk/`, linked into `~/repos/qmk_firmware` by
   `symlink.sh`. `private/qmk/CLAUDE.md` covers building, flashing and
   debugging the Lulu; read it before touching the keyboard. Two things to know
-  up front: USB goes in the left half, and the right half runs the
-  `barkis_noled` build because its display is broken (since 2026-10-02).
+  up front: USB goes in the left half, and since 2026-10-02 the halves take
+  different builds (`barkis` left, `barkis_right` right) to work around a
+  broken right display and a dead link wire.
 - VS Code settings are tracked under `~/Library/Application Support/Code/User/`.
