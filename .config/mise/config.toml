@@ -9,6 +9,7 @@ rust = "latest"
 
 [env]
 TESTBOI_OFFLOAD_MIN_PACKAGES = "60"
+TESTBOI_OFFLOAD_ALWAYS = "1"
 
 # GOCACHE budget for this machine. The shipped testboi defaults (100G max, 70G
 # target) assume a couple of checkouts; this laptop carries ~17 worktrees, whose
