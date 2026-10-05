@@ -16,7 +16,7 @@ Build with:
 ```sh
 qmk compile -kb boardsource/lulu/rp2040 -km barkis        # left half
 qmk compile -kb boardsource/lulu/rp2040 -km barkis_right  # right half
-qmk compile -kb ergodox_ez -km barkis
+qmk compile -kb ergodox_ez/base -km barkis
 ```
 
 The `.uf2` or `.hex` lands in the checkout root. `qmk config user.qmk_home`
@@ -131,6 +131,17 @@ To undo either workaround: for the display, reseat or replace the module
 (0.91" 128x32 SSD1306, I2C), drop `OLED_ENABLE = no` from `right/rules.mk`,
 flash the right half and check that it comes up on USB by itself. For the pin,
 only a repair to the left half would help.
+
+## The ErgoDox EZ
+
+A Teensy (HalfKay) board, USB in the right half. It doesn't mount as a drive,
+so the `.hex` goes on with `qmk flash -kb ergodox_ez/base -km barkis` (needs
+`teensy_loader_cli` from Homebrew), ZSA's Keymapp, or QMK Toolbox.
+
+To enter the bootloader, hold the top-left key (Del/fn) while plugging USB in,
+as on the Lulu, or press the button in the pinhole at the top right of the
+right half with a paperclip. The pinhole works even when the firmware doesn't
+start. In the bootloader the LEDs go out and the board stops typing.
 
 ## Debugging a half that won't come up
 

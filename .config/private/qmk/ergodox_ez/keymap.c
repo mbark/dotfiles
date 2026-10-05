@@ -27,11 +27,11 @@ enum {
    _FN
 };
 
-// Macros
+// Swedish letters, typed as macOS Option sequences
 enum {
-    _SWEO = SAFE_RANGE,
-    _SWEA,
-    _SWEAA,
+    SWE_AA = SAFE_RANGE, // å
+    SWE_AE,              // ä
+    SWE_OE,              // ö
 };
 
 
@@ -116,8 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         // right hand
         _______,   _______, _______, _______, _______, _______,  _______,
-        _______,   _______, _______, _______, _______, _______,  _SWEA,
-                   _______, _______, _______, _______, _SWEO,    _SWEAA,
+        _______,   _______, _______, _______, _______, _______,  SWE_AA,
+                   _______, _______, _______, _______, SWE_OE,   SWE_AE,
         _______,   _______, _______, _______, _______, _______,  _______,
         _______,   _______, _______, _______, _______,
 
@@ -257,34 +257,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // ==================== macros ====================
+// ä and ö are typed as Option+U followed by the letter, which assumes the
+// macOS US layout. Option+U is only a dead key without Shift, so the held
+// mods are dropped for it and restored for the letter.
+static void tap_umlaut(uint8_t letter) {
+    const uint8_t mods = get_mods();
+    clear_mods();
+    tap_code16(A(KC_U));
+    set_mods(mods);
+    tap_code(letter);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
-        switch(keycode) {
-            case _SWEA:
-                if (keyboard_report->mods & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))) {
-                    SEND_STRING(SS_LALT("A"));
-                } else {
-                    SEND_STRING(SS_LALT("a"));
-                }
+        switch (keycode) {
+            case SWE_AA:
+                tap_code16(A(KC_A));
                 return false;
-            case _SWEAA:
-                if (keyboard_report->mods & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))) {
-                    SEND_STRING(SS_LALT("u")"A");
-                } else {
-                    SEND_STRING(SS_LALT("u")"a");
-                }
+            case SWE_AE:
+                tap_umlaut(KC_A);
                 return false;
-            case _SWEO:
-                if (keyboard_report->mods & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))) {
-                    SEND_STRING(SS_LALT("u")"O");
-                } else {
-                    SEND_STRING(SS_LALT("u")"o");
-                }
+            case SWE_OE:
+                tap_umlaut(KC_O);
                 return false;
         }
     }
     return true;
-};
+}
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
