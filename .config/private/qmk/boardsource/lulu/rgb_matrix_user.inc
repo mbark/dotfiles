@@ -22,7 +22,10 @@ static bool RAINBOW_REACTIVE(effect_params_t* params) {
             }
         }
 
+        // QMK's scale16by8 multiplies by scale + 1, so a key at rest comes out
+        // just over 255, which would wrap around below to full brightness
         uint16_t offset = scale16by8(tick, qadd8(rgb_matrix_config.speed, 1));
+        if (offset > 255) offset = 255;
         hsv_t    hsv    = rgb_matrix_config.hsv;
         hsv.h += g_led_config.point[i].x;
         hsv.v = scale8(255 - offset, hsv.v);
