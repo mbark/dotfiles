@@ -10,6 +10,7 @@ enum custom_layers {
   _SYMBOL,
   _FN,
   _NAVIGATION,
+  _SWEDISH_NAV,
   _ADJUST,
 };
 
@@ -139,6 +140,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, _______,
                              _______, _______, _______, _______, _______,  _______, _______, _______
 ),
+/* SWEDISH NAV (SWE + NAV): the US keys back from under å ä ö, so = ; ' can
+ * still be typed with the Swedish layer toggled on. The rest is the nav layer.
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |  =   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | nav  |      |      |      |      |      |-------.    ,-------|      |      |      |      |   ;  |  '   |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   |      |      |      | /       /       \      \  |      |      |       |
+ *                   |      |      |      |/       /         \      \ |      |      |       |
+ *                   `----------------------------'           '------''--------------------'
+ */
+
+[_SWEDISH_NAV] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_EQL,
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, KC_SCLN, KC_QUOT,
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                             _______, _______, _______, _______, _______,  _______, _______, _______
+),
 /* ADJUST (SYM + FN)
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
@@ -164,7 +188,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _SYMBOL, _FN, _ADJUST);
+  state = update_tri_layer_state(state, _SYMBOL, _FN, _ADJUST);
+  return update_tri_layer_state(state, _SWEDISH, _NAVIGATION, _SWEDISH_NAV);
 }
 
 // ä and ö are typed as Option+U followed by the letter, which assumes the
@@ -260,6 +285,9 @@ static const glyph_t glyphs[] = {
   {'+', 3, {0b000, 0b000, 0b010, 0b111, 0b010, 0b000, 0b000}},
   {'\\', 3, {0b100, 0b100, 0b010, 0b010, 0b010, 0b001, 0b001}},
   {'`', 2, {0b10, 0b01, 0b00, 0b00, 0b00, 0b00, 0b00}},
+  {'=', 3, {0b000, 0b000, 0b111, 0b000, 0b111, 0b000, 0b000}},
+  {';', 2, {0b00, 0b01, 0b00, 0b00, 0b01, 0b01, 0b10}},
+  {'\'', 1, {1, 1, 0, 0, 0, 0, 0}},
   {'H', 3, {0b101, 0b101, 0b101, 0b111, 0b101, 0b101, 0b101}},
   {'S', 3, {0b011, 0b100, 0b100, 0b010, 0b001, 0b001, 0b110}},
   {'V', 3, {0b101, 0b101, 0b101, 0b101, 0b101, 0b101, 0b010}},
@@ -291,7 +319,7 @@ static const struct {
   {KC_F1, "1"},    {KC_F2, "2"},    {KC_F3, "3"},    {KC_F4, "4"},    {KC_F5, "5"},    {KC_F6, "6"},
   {KC_F7, "7"},    {KC_F8, "8"},    {KC_F9, "9"},    {KC_F10, "10"},  {KC_F11, "11"},  {KC_F12, "12"},
   {KC_LPRN, "("},  {KC_RPRN, ")"},  {KC_LBRC, "["},  {KC_RBRC, "]"},  {KC_LCBR, "{"},  {KC_RCBR, "}"},
-  {KC_MINS, "-"},  {KC_BSLS, "\\"}, {KC_GRV, "`"},
+  {KC_MINS, "-"},  {KC_BSLS, "\\"}, {KC_GRV, "`"},  {KC_EQL, "="},   {KC_SCLN, ";"},  {KC_QUOT, "'"},
   {KC_LEFT, "l"},  {KC_DOWN, "d"},  {KC_UP, "u"},    {KC_RGHT, "r"},
   {KC_VOLU, "+"},  {KC_VOLD, "-"},  {KC_MUTE, "sx"}, {KC_MPLY, "p"},  {KC_MNXT, "n"},
   {SWE_AA, "a"},   {SWE_AE, "e"},   {SWE_OE, "o"},
@@ -385,7 +413,8 @@ static bool row_is_empty(const char *labels[MAP_COLS], uint8_t cols) {
 
 static void render_layer_map(uint8_t layer) {
   static const char *const titles[] = {
-    [_SWEDISH] = " SWE ", [_SYMBOL] = " SYM ", [_FN] = " FN  ", [_NAVIGATION] = " NAV ", [_ADJUST] = " RGB ",
+    [_SWEDISH] = " SWE ", [_SYMBOL] = " SYM ", [_FN] = " FN  ", [_NAVIGATION] = " NAV ",
+    [_SWEDISH_NAV] = " US  ", [_ADJUST] = " RGB ",
   };
   oled_set_cursor(0, 0);
   oled_write(titles[layer], false);

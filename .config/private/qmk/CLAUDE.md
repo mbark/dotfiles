@@ -49,6 +49,10 @@ display and LEDs.
 | Left thumb, innermost | | symbol layer: brackets and a numpad on the right hand |
 | Left inner key (`SWE`) | toggle the Swedish layer (å ä ö) | Swedish layer while held |
 
+Holding Esc while the Swedish layer is on puts `=` `;` `'` back on the å ö ä
+keys (a tri-layer, `_SWEDISH_NAV`, over the nav layer), at the cost of the
+media keys that sit there on the nav layer.
+
 On the fn, nav and symbol layers the left home row A S D F is Shift, Ctrl,
 Alt, GUI. Symbol and fn together give the lighting controls. The Swedish
 letters are sent as Option sequences, so they assume the macOS US layout.
