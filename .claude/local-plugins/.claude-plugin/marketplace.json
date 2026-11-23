@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "local-plugins",
+  "description": "Personal plugins on this machine",
+  "owner": { "name": "Martin Wohlfart" },
+  "plugins": [
+    {
+      "name": "gopls-capped",
+      "description": "gopls with a 2 GiB GOMEMLIMIT, stopped when the session is idle",
+      "version": "1.0.0",
+      "source": "./gopls-capped"
+    }
+  ]
+}

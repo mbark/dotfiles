@@ -7,6 +7,7 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 tap "mbark/tap"
 tap "microsoft/git"
+tap "mobile-dev-inc/tap"
 tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "oven-sh/bun"
@@ -53,10 +54,14 @@ brew "avrdude"
 brew "awscli"
 # Programmable completion for Bash 4.2+
 brew "bash-completion@2"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # Command-line interface for the Convox PaaS
 brew "convox"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
 # Load/unload environment variables based on $PWD
@@ -195,6 +200,8 @@ brew "superfile"
 brew "tailscale"
 # Tool Command Language
 brew "tcl-tk"
+# Command-line integration for Teensy USB development boards
+brew "teensy_loader_cli"
 # Command-line interface for running and interacting with Temporal Server and UI
 brew "temporal"
 # Send macOS User Notifications from the command-line
@@ -203,6 +210,8 @@ brew "terminal-notifier"
 brew "tmux"
 # Program that allows you to count code, quickly
 brew "tokei"
+# Configure transparent encryption of files in a Git repo
+brew "transcrypt"
 # Compress/expand executable files
 brew "upx"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -227,12 +236,16 @@ brew "z3", link: false
 brew "coralogix/tap/cx", trusted: true
 # Terraform
 brew "hashicorp/tap/terraform", trusted: true
+# The easiest way to automate UI testing for your mobile app
+brew "mobile-dev-inc/tap/maestro", trusted: true
 # Portable daemon + CLI that bridges AI coding agents to the Moshi mobile app
 brew "rjyo/moshi/moshi-hook", trusted: true
 # Command-line interface for 1Password
 cask "1password-cli"
 # Application launcher and productivity software
 cask "alfred"
+# Command-line tools for Android development
+cask "android-commandlinetools"
 # Menu bar icon organiser
 cask "bartender"
 # Open source IDE for exploring and testing APIs
@@ -266,6 +279,7 @@ cask "houseparty"
 cask "istat-menus"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+cask "maestro"
 # Create mock APIs in seconds
 cask "mockoon"
 # Reverse proxy, secure introspectable tunnels to localhost
@@ -303,6 +317,7 @@ vscode "graphql.vscode-graphql-syntax"
 vscode "hashicorp.terraform"
 vscode "hverlin.mise-vscode"
 vscode "johnpapa.vscode-peacock"
+vscode "mechatroner.rainbow-csv"
 vscode "mikestead.dotenv"
 vscode "ms-azuretools.vscode-containers"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"

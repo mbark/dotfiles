@@ -1,0 +1,16 @@
+{
+  "description": "Stop the gopls of a session after it has been idle; Claude Code starts it again on the next Go edit or LSP request",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-idle-gopls.sh\" arm",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

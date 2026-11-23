@@ -6,7 +6,6 @@ Dotfiles managed as a bare git repo checked out over `$HOME`.
 
 ```sh
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-echo "dotfiles" > $HOME/.gitignore
 git clone --bare https://github.com/mbark/dotfiles $HOME/dotfiles
 dots checkout
 dots config --local status.showUntrackedFiles no
