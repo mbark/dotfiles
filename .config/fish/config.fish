@@ -52,13 +52,13 @@ alias mdslack="pbpaste | ruby ~/.config/private/md_slack.rb | pbcopy"
 complete --command dots --wraps git
 set -g fish_user_paths "$HOME/go/bin" $fish_user_paths
 set -x EDITOR nvim
+eval (/opt/homebrew/bin/brew shellenv fish)
 set -gx PATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin $PATH
 
 if type -q direnv
     direnv hook fish | source
 end
 
-eval (/opt/homebrew/bin/brew shellenv fish)
 mise activate fish | source
 fish_add_path /usr/local/sbin
 fish_add_path "$HOME/.arkade/bin"
