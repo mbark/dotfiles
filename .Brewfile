@@ -178,8 +178,6 @@ brew "node"
 brew "openai-whisper"
 # Development kit for the Java programming language
 brew "openjdk"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Object-relational database system
