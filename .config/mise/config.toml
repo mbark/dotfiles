@@ -11,13 +11,6 @@ rust = "latest"
 TESTBOI_OFFLOAD_MIN_PACKAGES = "60"
 TESTBOI_OFFLOAD_ALWAYS = "1"
 
-# GOCACHE budget for this machine. The shipped testboi defaults (100G max, 70G
-# target) assume a couple of checkouts; this laptop carries ~17 worktrees, whose
-# combined live set runs past them, and a budget under the live set makes every
-# prune evict the archives the next run needs. 398G free as of 2026-09-02.
-TESTBOI_CACHE_MAX = "200G"
-TESTBOI_CACHE_TARGET = "150G"
-
 # Floor for go invocations that testboi does not wrap - a script an agent writes
 # and then runs, an IDE build, a manual one-off. testboi itself always passes an
 # explicit -p, which wins over this, so its own runs are unaffected.
