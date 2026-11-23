@@ -238,6 +238,12 @@ brew "hashicorp/tap/terraform", trusted: true
 brew "mobile-dev-inc/tap/maestro", trusted: true
 # Portable daemon + CLI that bridges AI coding agents to the Moshi mobile app
 brew "rjyo/moshi/moshi-hook", trusted: true
+# Command-line tool for Stripe
+brew "stripe/stripe-cli/stripe", trusted: true
+# Command-line tool for Temporal Cloud
+brew "temporalio/brew/tcld", trusted: true
+# Password manager
+cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
 # Application launcher and productivity software
@@ -246,8 +252,14 @@ cask "alfred"
 cask "android-commandlinetools"
 # Menu bar icon organiser
 cask "bartender"
+# Unified chat app
+cask "beeper"
 # Open source IDE for exploring and testing APIs
 cask "bruno"
+# Desktop ChatGPT client
+cask "chatgpt-classic"
+# Desktop Claude client
+cask "claude"
 # API documentation browser and code snippet manager
 cask "dash"
 # Voice and text chat software
@@ -277,29 +289,51 @@ cask "houseparty"
 cask "istat-menus"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Issue tracker
+cask "linear"
+# Outliner and knowledge base
+cask "logseq"
 cask "maestro"
+# Meetings and chat
+cask "microsoft-teams"
 # Create mock APIs in seconds
 cask "mockoon"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+# Notes and docs workspace
+cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# WebKit web browser
+cask "orion"
 # Self-hosted daemon for AI coding agents
 cask "paseo"
+# Screen sharing and pair programming
+cask "pop-app"
 # Collaboration platform for API development
 cask "postman"
+# Flashing tool for QMK keyboards
+cask "qmk-toolbox"
+# Application launcher
+cask "raycast"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
+# Game library and client
+cask "steam"
 # Native GUI tool for relational databases
 cask "tableplus"
 # Ram disk management
 cask "tmpdisk"
 # Free and open-source OpenVPN client
 cask "tunnelblick"
+# Code editor, needed before the vscode extensions below can install
+cask "visual-studio-code"
 # Multiplayer code editor
 cask "zed"
+# Video meetings
+cask "zoom"
 vscode "alefragnani.bookmarks"
 vscode "anthropic.claude-code"
 vscode "bradlc.vscode-tailwindcss"

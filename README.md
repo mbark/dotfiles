@@ -19,8 +19,10 @@ brew bundle install --global
 ```
 
 Neovim installs its own plugins on first launch via lazy.nvim, pinned to
-`.config/nvim/lazy-lock.json`. Fish installs its plugins on first launch via
-fisher, from `.config/fish/fish_plugins`.
+`.config/nvim/lazy-lock.json`. Fish plugins are listed in
+`.config/fish/fish_plugins`; run `fisher update` once to install them.
+
+For the full new-machine checklist, see `setup.md`.
 
 ## Remote access
 
