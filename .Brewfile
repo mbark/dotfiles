@@ -178,6 +178,8 @@ brew "openai-whisper"
 brew "openjdk"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # Object-relational database system
 brew "postgresql@14", restart_service: :changed
 # Interpreted, interactive, object-oriented programming language

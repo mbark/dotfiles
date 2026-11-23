@@ -1,6 +1,7 @@
 [user]
 	email = github@wohlf.art
 	name = Martin Wohlfart
+	signingkey = 68953E1B37CEE3FE6ED97040763B352404721F6B
 [github]
 	user = mbark
 
@@ -39,6 +40,11 @@
 
 [commit]
         verbose = true
+        gpgsign = true
+
+# Full path because GUI apps like VS Code don't get Homebrew on their PATH.
+[gpg]
+	program = /opt/homebrew/bin/gpg
 
 [rerere]
         enabled = true

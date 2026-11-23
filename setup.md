@@ -73,6 +73,15 @@ brew services start moshi-hook
 brew services start postgresql@14
 ```
 
+Git signs commits with the GPG key from the private archives, and commits fail
+until signing works. Point GPG at the Mac passphrase dialog, then test it:
+
+```fish
+echo pinentry-program /opt/homebrew/bin/pinentry-mac > ~/.gnupg/gpg-agent.conf
+gpgconf --kill gpg-agent
+echo test | gpg --clearsign -u (git config user.signingkey) > /dev/null
+```
+
 ## 7. macOS settings
 
 Log out and back in afterwards so key repeat applies.
