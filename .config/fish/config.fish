@@ -55,7 +55,7 @@ set -x EDITOR nvim
 set -gx PATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin $PATH
 
 if type -q direnv
-    eval (direnv hook fish)
+    direnv hook fish | source
 end
 
 eval (/opt/homebrew/bin/brew shellenv fish)
