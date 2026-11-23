@@ -3,8 +3,6 @@ tap "anomalyco/tap"
 tap "armmbed/formulae"
 tap "coralogix/tap"
 tap "hashicorp/tap"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "mbark/tap"
 tap "microsoft/git"
 tap "mobile-dev-inc/tap"
@@ -224,8 +222,6 @@ brew "wget"
 brew "worktrunk"
 # Fast CSV toolkit written in Rust
 brew "xsv"
-# JavaScript package manager
-brew "yarn"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # High-performance theorem prover
@@ -284,7 +280,6 @@ cask "git-credential-manager"
 cask "gitbutler"
 # Web browser
 cask "google-chrome"
-cask "houseparty"
 # System monitoring app
 cask "istat-menus"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -363,8 +358,6 @@ vscode "usernamehw.errorlens"
 vscode "vitest.explorer"
 vscode "vscodevim.vim"
 vscode "vspacecode.whichkey"
-go "cmd/go"
-go "cmd/gofmt"
 go "github.com/golang/vscode-go/vscgo"
 uv "trafilatura"
 npm "corepack"
